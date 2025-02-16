@@ -1,0 +1,8 @@
+switch:
+  credential_group: switch_admin
+  devices:
+  - name:
+    ip:
+    vendor:
+    model:
+    type:
