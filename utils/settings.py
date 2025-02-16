@@ -39,9 +39,9 @@ LANGCHAIN_DEBUG = False
 # AI API 配置
 AI_SETTINGS = {
     'deepseek': {
-        'api_base': 'https://api.deepseek.com/v1',
-        'api_key': 'sk-1d94790d79c94f12b680b57d3ab46437',
-        'model': 'deepseek-reasoner'
+        'api_base': 'your-api-base',
+        'api_key': 'your-api-key',
+        'model': 'your-model'
     }
 }
 
