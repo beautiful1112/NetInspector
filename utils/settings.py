@@ -16,27 +16,27 @@ OUTPUT_DIRS = {
     'reports': os.path.join(BASE_DIR, 'output', 'reports')
 }
 
-# 确保输出目录存在
+# create output directories
 for dir_path in OUTPUT_DIRS.values():
     os.makedirs(dir_path, exist_ok=True)
 
 
-# 设备连接配置
+# settings
 CONNECT_TIMEOUT = 60
 COMMAND_TIMEOUT = 120
 RETRY_TIMES = 3
 RETRY_INTERVAL = 10
 
-# 终端输出配置
+# log settings
 ENABLE_CONSOLE_OUTPUT = True
 
-# LangChain配置
+# LangChain settings
 LANGCHAIN_VERBOSE = True
 LANGCHAIN_DEBUG = False
 
-# OpenAI配置
+# OpenAI settings
 
-# AI API 配置
+# AI API settings
 AI_SETTINGS = {
     'deepseek': {
         'api_base': 'your-api-base',
@@ -45,14 +45,14 @@ AI_SETTINGS = {
     }
 }
 
-# 日志配置
+# Log settings
 LOG_SETTINGS = {
     'log_dir': 'logs',
     'log_level': 'INFO',
     'log_format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 }
 
-# 输出目录配置
+# Output directories
 OUTPUT_DIRS = {
     'raw_configs': 'raw_configs',
     'reports': 'reports'
