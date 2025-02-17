@@ -10,7 +10,7 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 # get base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# 构建输出目录的完整路径
+# output directories
 OUTPUT_DIRS = {
     'raw_configs': os.path.join(BASE_DIR, 'output', 'raw_configs'),
     'reports': os.path.join(BASE_DIR, 'output', 'reports')
