@@ -1,13 +1,13 @@
 # settings.py
 
-# 日志配置
+# load settings
 # utils/settings.py
 import os
 
-# 获取当前文件的目录
+# get current directory
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# 获取项目根目录 (当前目录的父目录)
+# get base directory
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # 构建输出目录的完整路径
