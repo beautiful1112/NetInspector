@@ -1,0 +1,72 @@
+As a senior network engineer, please analyze the following Huawei firewall configuration:
+
+{config}
+
+Please provide a comprehensive analysis report with the following structure:
+
+1. Configuration Overview
+   - Device Information (Model, OS version, Uptime)
+   - System Configuration Scale
+   - Interface Summary
+   - Routing Overview
+   - High Availability Status
+
+2. Security Risk Assessment
+   - High-Risk Configuration Items
+   - Security Policy Analysis
+     * Rule base complexity
+     * Shadow rules identification
+     * Unused rules detection
+     * Object group utilization
+   - NAT Configuration Audit
+     * NAT policy consistency
+     * Address translation efficiency
+     * NAT rule optimization
+   - Access Control Evaluation
+     * Zone security settings
+     * Interface security policies
+     * VPN configuration review
+
+3. Performance Analysis
+   - Resource Utilization
+     * CPU and memory usage
+     * Session table utilization
+     * Interface bandwidth usage
+   - Performance Bottleneck Identification
+     * Configuration-related bottlenecks
+     * Hardware resource constraints
+     * Throughput limitations
+   - Optimization Opportunities
+     * Rule base optimization
+     * Session management
+     * Resource allocation
+
+4. Compliance Assessment
+   - Logging and Audit Configuration
+     * Syslog settings
+     * Security event logging
+     * Traffic monitoring
+   - Security Baseline Compliance
+     * Industry standard alignment
+     * Best practice conformity
+     * Security hardening status
+   - Authentication and Access Control
+     * Password policies
+     * Administrative access methods
+     * AAA configuration
+
+5. Improvement Recommendations
+   - Critical Priority Items
+     * Security vulnerabilities
+     * Performance impacts
+     * Immediate risks
+   - Medium Priority Optimizations
+     * Configuration efficiency
+     * Resource optimization
+     * Policy improvements
+   - Low Priority Suggestions
+     * Best practice alignment
+     * Documentation updates
+     * Future-proofing recommendations
+
+Please include specific configuration examples and technical justifications for each identified issue, and ensure recommendations are actionable and aligned with industry best practices.
