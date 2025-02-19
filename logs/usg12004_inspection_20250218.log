@@ -1,0 +1,1852 @@
+2025-02-18 23:27:29,754 - async_inspection - INFO - Starting to inspect: 192.168.1.1
+2025-02-18 23:27:29,756 - usg12004_inspector - INFO - Project root: C:\Users\alex-zhao\PycharmProjects\NetInspector
+2025-02-18 23:27:29,756 - usg12004_inspector - INFO - Raw configs directory: C:\Users\alex-zhao\PycharmProjects\NetInspector\output\raw_configs
+2025-02-18 23:27:29,756 - usg12004_inspector - INFO - Reports directory: C:\Users\alex-zhao\PycharmProjects\NetInspector\output\reports
+2025-02-18 23:27:29,756 - usg12004_inspector - INFO - Directories created/verified successfully
+2025-02-18 23:27:29,756 - usg12004_inspector - INFO - Commands loaded from C:\Users\alex-zhao\PycharmProjects\NetInspector\templates\commands\usg12004_commands.json
+2025-02-18 23:27:30,214 - usg12004_inspector - INFO - AI model initialized successfully
+2025-02-18 23:27:30,215 - usg12004_inspector - INFO - ==================================================
+2025-02-18 23:27:30,215 - async_inspection - INFO - Starting to inspect: 192.168.2.1
+2025-02-18 23:27:30,215 - usg12004_inspector - INFO - Starting to collect date of device 192.168.1.1 ...
+2025-02-18 23:27:30,215 - usg12004_inspector - INFO - ==================================================
+2025-02-18 23:27:30,215 - connect.device_connector - ERROR - Failed to connect to 192.168.1.1: Unsupported 'device_type' currently supported platforms are: 
+a10
+accedian
+adtran_os
+adva_fsp150f2
+adva_fsp150f3
+alaxala_ax26s
+alaxala_ax36s
+alcatel_aos
+alcatel_sros
+allied_telesis_awplus
+apresia_aeos
+arista_eos
+arris_cer
+aruba_aoscx
+aruba_os
+aruba_osswitch
+aruba_procurve
+audiocode_66
+audiocode_72
+audiocode_shell
+avaya_ers
+avaya_vsp
+broadcom_icos
+brocade_fastiron
+brocade_fos
+brocade_netiron
+brocade_nos
+brocade_vdx
+brocade_vyos
+calix_b6
+casa_cmts
+cdot_cros
+centec_os
+checkpoint_gaia
+ciena_saos
+cisco_apic
+cisco_asa
+cisco_ftd
+cisco_ios
+cisco_nxos
+cisco_s200
+cisco_s300
+cisco_tp
+cisco_viptela
+cisco_wlc
+cisco_xe
+cisco_xr
+cloudgenix_ion
+coriant
+dell_dnos9
+dell_force10
+dell_isilon
+dell_os10
+dell_os6
+dell_os9
+dell_powerconnect
+dell_sonic
+digi_transport
+dlink_ds
+eltex
+eltex_esr
+endace
+enterasys
+ericsson_ipos
+ericsson_mltn63
+ericsson_mltn66
+extreme
+extreme_ers
+extreme_exos
+extreme_netiron
+extreme_nos
+extreme_slx
+extreme_tierra
+extreme_vdx
+extreme_vsp
+extreme_wing
+f5_linux
+f5_ltm
+f5_tmsh
+fiberstore_fsos
+flexvnf
+fortinet
+garderos_grs
+generic
+generic_termserver
+hillstone_stoneos
+hp_comware
+hp_procurve
+huawei
+huawei_olt
+huawei_smartax
+huawei_vrp
+huawei_vrpv8
+ipinfusion_ocnos
+juniper
+juniper_junos
+juniper_screenos
+keymile
+keymile_nos
+linux
+maipu
+mellanox
+mellanox_mlnxos
+mikrotik_routeros
+mikrotik_switchos
+mrv_lx
+mrv_optiswitch
+netapp_cdot
+netgear_prosafe
+netscaler
+nokia_srl
+nokia_sros
+oneaccess_oneos
+ovs_linux
+paloalto_panos
+pluribus
+quanta_mesh
+rad_etx
+raisecom_roap
+ruckus_fastiron
+ruijie_os
+sixwind_os
+sophos_sfos
+supermicro_smis
+teldat_cit
+tplink_jetstream
+ubiquiti_edge
+ubiquiti_edgerouter
+ubiquiti_edgeswitch
+ubiquiti_unifiswitch
+vertiv_mph
+vyatta_vyos
+vyos
+watchguard_fireware
+yamaha
+zte_zxros
+zyxel_os
+2025-02-18 23:27:30,216 - usg12004_inspector - INFO - Project root: C:\Users\alex-zhao\PycharmProjects\NetInspector
+2025-02-18 23:27:30,217 - usg12004_inspector - INFO - Raw configs directory: C:\Users\alex-zhao\PycharmProjects\NetInspector\output\raw_configs
+2025-02-18 23:27:30,217 - usg12004_inspector - INFO - Reports directory: C:\Users\alex-zhao\PycharmProjects\NetInspector\output\reports
+2025-02-18 23:27:30,217 - usg12004_inspector - INFO - Directories created/verified successfully
+2025-02-18 23:27:30,217 - usg12004_inspector - INFO - Commands loaded from C:\Users\alex-zhao\PycharmProjects\NetInspector\templates\commands\usg12004_commands.json
+2025-02-18 23:27:30,679 - usg12004_inspector - INFO - AI model initialized successfully
+2025-02-18 23:27:30,679 - usg12004_inspector - INFO - ==================================================
+2025-02-18 23:27:30,679 - usg12004_inspector - INFO - Starting to collect date of device 192.168.2.1 ...
+2025-02-18 23:27:30,679 - usg12004_inspector - INFO - ==================================================
+2025-02-18 23:27:30,679 - connect.device_connector - ERROR - Failed to connect to 192.168.2.1: Unsupported 'device_type' currently supported platforms are: 
+a10
+accedian
+adtran_os
+adva_fsp150f2
+adva_fsp150f3
+alaxala_ax26s
+alaxala_ax36s
+alcatel_aos
+alcatel_sros
+allied_telesis_awplus
+apresia_aeos
+arista_eos
+arris_cer
+aruba_aoscx
+aruba_os
+aruba_osswitch
+aruba_procurve
+audiocode_66
+audiocode_72
+audiocode_shell
+avaya_ers
+avaya_vsp
+broadcom_icos
+brocade_fastiron
+brocade_fos
+brocade_netiron
+brocade_nos
+brocade_vdx
+brocade_vyos
+calix_b6
+casa_cmts
+cdot_cros
+centec_os
+checkpoint_gaia
+ciena_saos
+cisco_apic
+cisco_asa
+cisco_ftd
+cisco_ios
+cisco_nxos
+cisco_s200
+cisco_s300
+cisco_tp
+cisco_viptela
+cisco_wlc
+cisco_xe
+cisco_xr
+cloudgenix_ion
+coriant
+dell_dnos9
+dell_force10
+dell_isilon
+dell_os10
+dell_os6
+dell_os9
+dell_powerconnect
+dell_sonic
+digi_transport
+dlink_ds
+eltex
+eltex_esr
+endace
+enterasys
+ericsson_ipos
+ericsson_mltn63
+ericsson_mltn66
+extreme
+extreme_ers
+extreme_exos
+extreme_netiron
+extreme_nos
+extreme_slx
+extreme_tierra
+extreme_vdx
+extreme_vsp
+extreme_wing
+f5_linux
+f5_ltm
+f5_tmsh
+fiberstore_fsos
+flexvnf
+fortinet
+garderos_grs
+generic
+generic_termserver
+hillstone_stoneos
+hp_comware
+hp_procurve
+huawei
+huawei_olt
+huawei_smartax
+huawei_vrp
+huawei_vrpv8
+ipinfusion_ocnos
+juniper
+juniper_junos
+juniper_screenos
+keymile
+keymile_nos
+linux
+maipu
+mellanox
+mellanox_mlnxos
+mikrotik_routeros
+mikrotik_switchos
+mrv_lx
+mrv_optiswitch
+netapp_cdot
+netgear_prosafe
+netscaler
+nokia_srl
+nokia_sros
+oneaccess_oneos
+ovs_linux
+paloalto_panos
+pluribus
+quanta_mesh
+rad_etx
+raisecom_roap
+ruckus_fastiron
+ruijie_os
+sixwind_os
+sophos_sfos
+supermicro_smis
+teldat_cit
+tplink_jetstream
+ubiquiti_edge
+ubiquiti_edgerouter
+ubiquiti_edgeswitch
+ubiquiti_unifiswitch
+vertiv_mph
+vyatta_vyos
+vyos
+watchguard_fireware
+yamaha
+zte_zxros
+zyxel_os
+2025-02-18 23:27:35,216 - connect.device_connector - ERROR - Failed to connect to 192.168.1.1: Unsupported 'device_type' currently supported platforms are: 
+a10
+accedian
+adtran_os
+adva_fsp150f2
+adva_fsp150f3
+alaxala_ax26s
+alaxala_ax36s
+alcatel_aos
+alcatel_sros
+allied_telesis_awplus
+apresia_aeos
+arista_eos
+arris_cer
+aruba_aoscx
+aruba_os
+aruba_osswitch
+aruba_procurve
+audiocode_66
+audiocode_72
+audiocode_shell
+avaya_ers
+avaya_vsp
+broadcom_icos
+brocade_fastiron
+brocade_fos
+brocade_netiron
+brocade_nos
+brocade_vdx
+brocade_vyos
+calix_b6
+casa_cmts
+cdot_cros
+centec_os
+checkpoint_gaia
+ciena_saos
+cisco_apic
+cisco_asa
+cisco_ftd
+cisco_ios
+cisco_nxos
+cisco_s200
+cisco_s300
+cisco_tp
+cisco_viptela
+cisco_wlc
+cisco_xe
+cisco_xr
+cloudgenix_ion
+coriant
+dell_dnos9
+dell_force10
+dell_isilon
+dell_os10
+dell_os6
+dell_os9
+dell_powerconnect
+dell_sonic
+digi_transport
+dlink_ds
+eltex
+eltex_esr
+endace
+enterasys
+ericsson_ipos
+ericsson_mltn63
+ericsson_mltn66
+extreme
+extreme_ers
+extreme_exos
+extreme_netiron
+extreme_nos
+extreme_slx
+extreme_tierra
+extreme_vdx
+extreme_vsp
+extreme_wing
+f5_linux
+f5_ltm
+f5_tmsh
+fiberstore_fsos
+flexvnf
+fortinet
+garderos_grs
+generic
+generic_termserver
+hillstone_stoneos
+hp_comware
+hp_procurve
+huawei
+huawei_olt
+huawei_smartax
+huawei_vrp
+huawei_vrpv8
+ipinfusion_ocnos
+juniper
+juniper_junos
+juniper_screenos
+keymile
+keymile_nos
+linux
+maipu
+mellanox
+mellanox_mlnxos
+mikrotik_routeros
+mikrotik_switchos
+mrv_lx
+mrv_optiswitch
+netapp_cdot
+netgear_prosafe
+netscaler
+nokia_srl
+nokia_sros
+oneaccess_oneos
+ovs_linux
+paloalto_panos
+pluribus
+quanta_mesh
+rad_etx
+raisecom_roap
+ruckus_fastiron
+ruijie_os
+sixwind_os
+sophos_sfos
+supermicro_smis
+teldat_cit
+tplink_jetstream
+ubiquiti_edge
+ubiquiti_edgerouter
+ubiquiti_edgeswitch
+ubiquiti_unifiswitch
+vertiv_mph
+vyatta_vyos
+vyos
+watchguard_fireware
+yamaha
+zte_zxros
+zyxel_os
+2025-02-18 23:27:35,680 - connect.device_connector - ERROR - Failed to connect to 192.168.2.1: Unsupported 'device_type' currently supported platforms are: 
+a10
+accedian
+adtran_os
+adva_fsp150f2
+adva_fsp150f3
+alaxala_ax26s
+alaxala_ax36s
+alcatel_aos
+alcatel_sros
+allied_telesis_awplus
+apresia_aeos
+arista_eos
+arris_cer
+aruba_aoscx
+aruba_os
+aruba_osswitch
+aruba_procurve
+audiocode_66
+audiocode_72
+audiocode_shell
+avaya_ers
+avaya_vsp
+broadcom_icos
+brocade_fastiron
+brocade_fos
+brocade_netiron
+brocade_nos
+brocade_vdx
+brocade_vyos
+calix_b6
+casa_cmts
+cdot_cros
+centec_os
+checkpoint_gaia
+ciena_saos
+cisco_apic
+cisco_asa
+cisco_ftd
+cisco_ios
+cisco_nxos
+cisco_s200
+cisco_s300
+cisco_tp
+cisco_viptela
+cisco_wlc
+cisco_xe
+cisco_xr
+cloudgenix_ion
+coriant
+dell_dnos9
+dell_force10
+dell_isilon
+dell_os10
+dell_os6
+dell_os9
+dell_powerconnect
+dell_sonic
+digi_transport
+dlink_ds
+eltex
+eltex_esr
+endace
+enterasys
+ericsson_ipos
+ericsson_mltn63
+ericsson_mltn66
+extreme
+extreme_ers
+extreme_exos
+extreme_netiron
+extreme_nos
+extreme_slx
+extreme_tierra
+extreme_vdx
+extreme_vsp
+extreme_wing
+f5_linux
+f5_ltm
+f5_tmsh
+fiberstore_fsos
+flexvnf
+fortinet
+garderos_grs
+generic
+generic_termserver
+hillstone_stoneos
+hp_comware
+hp_procurve
+huawei
+huawei_olt
+huawei_smartax
+huawei_vrp
+huawei_vrpv8
+ipinfusion_ocnos
+juniper
+juniper_junos
+juniper_screenos
+keymile
+keymile_nos
+linux
+maipu
+mellanox
+mellanox_mlnxos
+mikrotik_routeros
+mikrotik_switchos
+mrv_lx
+mrv_optiswitch
+netapp_cdot
+netgear_prosafe
+netscaler
+nokia_srl
+nokia_sros
+oneaccess_oneos
+ovs_linux
+paloalto_panos
+pluribus
+quanta_mesh
+rad_etx
+raisecom_roap
+ruckus_fastiron
+ruijie_os
+sixwind_os
+sophos_sfos
+supermicro_smis
+teldat_cit
+tplink_jetstream
+ubiquiti_edge
+ubiquiti_edgerouter
+ubiquiti_edgeswitch
+ubiquiti_unifiswitch
+vertiv_mph
+vyatta_vyos
+vyos
+watchguard_fireware
+yamaha
+zte_zxros
+zyxel_os
+2025-02-18 23:27:40,217 - connect.device_connector - ERROR - Failed to connect to 192.168.1.1: Unsupported 'device_type' currently supported platforms are: 
+a10
+accedian
+adtran_os
+adva_fsp150f2
+adva_fsp150f3
+alaxala_ax26s
+alaxala_ax36s
+alcatel_aos
+alcatel_sros
+allied_telesis_awplus
+apresia_aeos
+arista_eos
+arris_cer
+aruba_aoscx
+aruba_os
+aruba_osswitch
+aruba_procurve
+audiocode_66
+audiocode_72
+audiocode_shell
+avaya_ers
+avaya_vsp
+broadcom_icos
+brocade_fastiron
+brocade_fos
+brocade_netiron
+brocade_nos
+brocade_vdx
+brocade_vyos
+calix_b6
+casa_cmts
+cdot_cros
+centec_os
+checkpoint_gaia
+ciena_saos
+cisco_apic
+cisco_asa
+cisco_ftd
+cisco_ios
+cisco_nxos
+cisco_s200
+cisco_s300
+cisco_tp
+cisco_viptela
+cisco_wlc
+cisco_xe
+cisco_xr
+cloudgenix_ion
+coriant
+dell_dnos9
+dell_force10
+dell_isilon
+dell_os10
+dell_os6
+dell_os9
+dell_powerconnect
+dell_sonic
+digi_transport
+dlink_ds
+eltex
+eltex_esr
+endace
+enterasys
+ericsson_ipos
+ericsson_mltn63
+ericsson_mltn66
+extreme
+extreme_ers
+extreme_exos
+extreme_netiron
+extreme_nos
+extreme_slx
+extreme_tierra
+extreme_vdx
+extreme_vsp
+extreme_wing
+f5_linux
+f5_ltm
+f5_tmsh
+fiberstore_fsos
+flexvnf
+fortinet
+garderos_grs
+generic
+generic_termserver
+hillstone_stoneos
+hp_comware
+hp_procurve
+huawei
+huawei_olt
+huawei_smartax
+huawei_vrp
+huawei_vrpv8
+ipinfusion_ocnos
+juniper
+juniper_junos
+juniper_screenos
+keymile
+keymile_nos
+linux
+maipu
+mellanox
+mellanox_mlnxos
+mikrotik_routeros
+mikrotik_switchos
+mrv_lx
+mrv_optiswitch
+netapp_cdot
+netgear_prosafe
+netscaler
+nokia_srl
+nokia_sros
+oneaccess_oneos
+ovs_linux
+paloalto_panos
+pluribus
+quanta_mesh
+rad_etx
+raisecom_roap
+ruckus_fastiron
+ruijie_os
+sixwind_os
+sophos_sfos
+supermicro_smis
+teldat_cit
+tplink_jetstream
+ubiquiti_edge
+ubiquiti_edgerouter
+ubiquiti_edgeswitch
+ubiquiti_unifiswitch
+vertiv_mph
+vyatta_vyos
+vyos
+watchguard_fireware
+yamaha
+zte_zxros
+zyxel_os
+2025-02-18 23:27:40,217 - usg12004_inspector - ERROR - Date collected failed: Failed to connect to 192.168.1.1 after 3 attempts
+Traceback (most recent call last):
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 84, in collect_data
+    self.device_connector.connect()
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\connect\device_connector.py", line 36, in connect
+    raise ConnectionError(f"Failed to connect to {self.device_info['host']} after {self.max_retries} attempts")
+ConnectionError: Failed to connect to 192.168.1.1 after 3 attempts
+2025-02-18 23:27:40,219 - usg12004_inspector - INFO - Disconnected from device 192.168.1.1 
+2025-02-18 23:27:40,219 - usg12004_inspector - ERROR - Inspecting failed: Failed to connect to 192.168.1.1 after 3 attempts
+Traceback (most recent call last):
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 262, in run
+    config_data = self.collect_data()
+                  ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 84, in collect_data
+    self.device_connector.connect()
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\connect\device_connector.py", line 36, in connect
+    raise ConnectionError(f"Failed to connect to {self.device_info['host']} after {self.max_retries} attempts")
+ConnectionError: Failed to connect to 192.168.1.1 after 3 attempts
+2025-02-18 23:27:40,221 - async_inspection - ERROR -  192.168.1.1 inspecting failed: Failed to connect to 192.168.1.1 after 3 attempts
+Traceback (most recent call last):
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 292, in inspect_device_async
+    raw_config, report = await loop.run_in_executor(None, inspector.run)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alex-zhao\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 262, in run
+    config_data = self.collect_data()
+                  ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 84, in collect_data
+    self.device_connector.connect()
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\connect\device_connector.py", line 36, in connect
+    raise ConnectionError(f"Failed to connect to {self.device_info['host']} after {self.max_retries} attempts")
+ConnectionError: Failed to connect to 192.168.1.1 after 3 attempts
+2025-02-18 23:27:40,681 - connect.device_connector - ERROR - Failed to connect to 192.168.2.1: Unsupported 'device_type' currently supported platforms are: 
+a10
+accedian
+adtran_os
+adva_fsp150f2
+adva_fsp150f3
+alaxala_ax26s
+alaxala_ax36s
+alcatel_aos
+alcatel_sros
+allied_telesis_awplus
+apresia_aeos
+arista_eos
+arris_cer
+aruba_aoscx
+aruba_os
+aruba_osswitch
+aruba_procurve
+audiocode_66
+audiocode_72
+audiocode_shell
+avaya_ers
+avaya_vsp
+broadcom_icos
+brocade_fastiron
+brocade_fos
+brocade_netiron
+brocade_nos
+brocade_vdx
+brocade_vyos
+calix_b6
+casa_cmts
+cdot_cros
+centec_os
+checkpoint_gaia
+ciena_saos
+cisco_apic
+cisco_asa
+cisco_ftd
+cisco_ios
+cisco_nxos
+cisco_s200
+cisco_s300
+cisco_tp
+cisco_viptela
+cisco_wlc
+cisco_xe
+cisco_xr
+cloudgenix_ion
+coriant
+dell_dnos9
+dell_force10
+dell_isilon
+dell_os10
+dell_os6
+dell_os9
+dell_powerconnect
+dell_sonic
+digi_transport
+dlink_ds
+eltex
+eltex_esr
+endace
+enterasys
+ericsson_ipos
+ericsson_mltn63
+ericsson_mltn66
+extreme
+extreme_ers
+extreme_exos
+extreme_netiron
+extreme_nos
+extreme_slx
+extreme_tierra
+extreme_vdx
+extreme_vsp
+extreme_wing
+f5_linux
+f5_ltm
+f5_tmsh
+fiberstore_fsos
+flexvnf
+fortinet
+garderos_grs
+generic
+generic_termserver
+hillstone_stoneos
+hp_comware
+hp_procurve
+huawei
+huawei_olt
+huawei_smartax
+huawei_vrp
+huawei_vrpv8
+ipinfusion_ocnos
+juniper
+juniper_junos
+juniper_screenos
+keymile
+keymile_nos
+linux
+maipu
+mellanox
+mellanox_mlnxos
+mikrotik_routeros
+mikrotik_switchos
+mrv_lx
+mrv_optiswitch
+netapp_cdot
+netgear_prosafe
+netscaler
+nokia_srl
+nokia_sros
+oneaccess_oneos
+ovs_linux
+paloalto_panos
+pluribus
+quanta_mesh
+rad_etx
+raisecom_roap
+ruckus_fastiron
+ruijie_os
+sixwind_os
+sophos_sfos
+supermicro_smis
+teldat_cit
+tplink_jetstream
+ubiquiti_edge
+ubiquiti_edgerouter
+ubiquiti_edgeswitch
+ubiquiti_unifiswitch
+vertiv_mph
+vyatta_vyos
+vyos
+watchguard_fireware
+yamaha
+zte_zxros
+zyxel_os
+2025-02-18 23:27:40,681 - usg12004_inspector - ERROR - Date collected failed: Failed to connect to 192.168.2.1 after 3 attempts
+Traceback (most recent call last):
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 84, in collect_data
+    self.device_connector.connect()
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\connect\device_connector.py", line 36, in connect
+    raise ConnectionError(f"Failed to connect to {self.device_info['host']} after {self.max_retries} attempts")
+ConnectionError: Failed to connect to 192.168.2.1 after 3 attempts
+2025-02-18 23:27:40,683 - usg12004_inspector - INFO - Disconnected from device 192.168.2.1 
+2025-02-18 23:27:40,683 - usg12004_inspector - ERROR - Inspecting failed: Failed to connect to 192.168.2.1 after 3 attempts
+Traceback (most recent call last):
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 262, in run
+    config_data = self.collect_data()
+                  ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 84, in collect_data
+    self.device_connector.connect()
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\connect\device_connector.py", line 36, in connect
+    raise ConnectionError(f"Failed to connect to {self.device_info['host']} after {self.max_retries} attempts")
+ConnectionError: Failed to connect to 192.168.2.1 after 3 attempts
+2025-02-18 23:27:40,685 - async_inspection - ERROR -  192.168.2.1 inspecting failed: Failed to connect to 192.168.2.1 after 3 attempts
+Traceback (most recent call last):
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 292, in inspect_device_async
+    raw_config, report = await loop.run_in_executor(None, inspector.run)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alex-zhao\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 262, in run
+    config_data = self.collect_data()
+                  ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 84, in collect_data
+    self.device_connector.connect()
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\connect\device_connector.py", line 36, in connect
+    raise ConnectionError(f"Failed to connect to {self.device_info['host']} after {self.max_retries} attempts")
+ConnectionError: Failed to connect to 192.168.2.1 after 3 attempts
+2025-02-18 23:27:40,687 - main_async - INFO - ==================================================
+2025-02-18 23:27:40,687 - main_async - INFO - Tasks are done！Sum of results：
+2025-02-18 23:27:40,687 - main_async - INFO - ==================================================
+2025-02-18 23:27:40,687 - main_async - INFO - Sum of devices: 2
+2025-02-18 23:27:40,687 - main_async - INFO - Sum of success: 0
+2025-02-18 23:27:40,687 - main_async - INFO - Sum of failure: 2
+2025-02-18 23:27:40,688 - main_async - INFO - Device 192.168.1.1: status: failed
+2025-02-18 23:27:40,688 - main_async - INFO - Error: Failed to connect to 192.168.1.1 after 3 attempts
+2025-02-18 23:27:40,688 - main_async - INFO - Device 192.168.2.1: status: failed
+2025-02-18 23:27:40,688 - main_async - INFO - Error: Failed to connect to 192.168.2.1 after 3 attempts
+2025-02-18 23:57:40,996 - async_inspection - INFO - Starting to inspect: 192.168.1.1
+2025-02-18 23:57:40,998 - usg12004_inspector - INFO - Project root: C:\Users\alex-zhao\PycharmProjects\NetInspector
+2025-02-18 23:57:40,998 - usg12004_inspector - INFO - Raw configs directory: C:\Users\alex-zhao\PycharmProjects\NetInspector\output\raw_configs
+2025-02-18 23:57:40,998 - usg12004_inspector - INFO - Reports directory: C:\Users\alex-zhao\PycharmProjects\NetInspector\output\reports
+2025-02-18 23:57:40,998 - usg12004_inspector - INFO - Directories created/verified successfully
+2025-02-18 23:57:40,998 - usg12004_inspector - INFO - Commands loaded from C:\Users\alex-zhao\PycharmProjects\NetInspector\templates\commands\usg12004_commands.json
+2025-02-18 23:57:41,440 - usg12004_inspector - INFO - AI model initialized successfully
+2025-02-18 23:57:41,441 - usg12004_inspector - INFO - ==================================================
+2025-02-18 23:57:41,441 - async_inspection - INFO - Starting to inspect: 192.168.2.1
+2025-02-18 23:57:41,441 - usg12004_inspector - INFO - Starting to collect data of device 192.168.1.1 ...
+2025-02-18 23:57:41,441 - usg12004_inspector - INFO - ==================================================
+2025-02-18 23:57:41,441 - connect.device_connector - ERROR - Failed to connect to 192.168.1.1: Unsupported 'device_type' currently supported platforms are: 
+a10
+accedian
+adtran_os
+adva_fsp150f2
+adva_fsp150f3
+alaxala_ax26s
+alaxala_ax36s
+alcatel_aos
+alcatel_sros
+allied_telesis_awplus
+apresia_aeos
+arista_eos
+arris_cer
+aruba_aoscx
+aruba_os
+aruba_osswitch
+aruba_procurve
+audiocode_66
+audiocode_72
+audiocode_shell
+avaya_ers
+avaya_vsp
+broadcom_icos
+brocade_fastiron
+brocade_fos
+brocade_netiron
+brocade_nos
+brocade_vdx
+brocade_vyos
+calix_b6
+casa_cmts
+cdot_cros
+centec_os
+checkpoint_gaia
+ciena_saos
+cisco_apic
+cisco_asa
+cisco_ftd
+cisco_ios
+cisco_nxos
+cisco_s200
+cisco_s300
+cisco_tp
+cisco_viptela
+cisco_wlc
+cisco_xe
+cisco_xr
+cloudgenix_ion
+coriant
+dell_dnos9
+dell_force10
+dell_isilon
+dell_os10
+dell_os6
+dell_os9
+dell_powerconnect
+dell_sonic
+digi_transport
+dlink_ds
+eltex
+eltex_esr
+endace
+enterasys
+ericsson_ipos
+ericsson_mltn63
+ericsson_mltn66
+extreme
+extreme_ers
+extreme_exos
+extreme_netiron
+extreme_nos
+extreme_slx
+extreme_tierra
+extreme_vdx
+extreme_vsp
+extreme_wing
+f5_linux
+f5_ltm
+f5_tmsh
+fiberstore_fsos
+flexvnf
+fortinet
+garderos_grs
+generic
+generic_termserver
+hillstone_stoneos
+hp_comware
+hp_procurve
+huawei
+huawei_olt
+huawei_smartax
+huawei_vrp
+huawei_vrpv8
+ipinfusion_ocnos
+juniper
+juniper_junos
+juniper_screenos
+keymile
+keymile_nos
+linux
+maipu
+mellanox
+mellanox_mlnxos
+mikrotik_routeros
+mikrotik_switchos
+mrv_lx
+mrv_optiswitch
+netapp_cdot
+netgear_prosafe
+netscaler
+nokia_srl
+nokia_sros
+oneaccess_oneos
+ovs_linux
+paloalto_panos
+pluribus
+quanta_mesh
+rad_etx
+raisecom_roap
+ruckus_fastiron
+ruijie_os
+sixwind_os
+sophos_sfos
+supermicro_smis
+teldat_cit
+tplink_jetstream
+ubiquiti_edge
+ubiquiti_edgerouter
+ubiquiti_edgeswitch
+ubiquiti_unifiswitch
+vertiv_mph
+vyatta_vyos
+vyos
+watchguard_fireware
+yamaha
+zte_zxros
+zyxel_os
+2025-02-18 23:57:41,442 - usg12004_inspector - INFO - Project root: C:\Users\alex-zhao\PycharmProjects\NetInspector
+2025-02-18 23:57:41,442 - usg12004_inspector - INFO - Raw configs directory: C:\Users\alex-zhao\PycharmProjects\NetInspector\output\raw_configs
+2025-02-18 23:57:41,443 - usg12004_inspector - INFO - Reports directory: C:\Users\alex-zhao\PycharmProjects\NetInspector\output\reports
+2025-02-18 23:57:41,443 - usg12004_inspector - INFO - Directories created/verified successfully
+2025-02-18 23:57:41,443 - usg12004_inspector - INFO - Commands loaded from C:\Users\alex-zhao\PycharmProjects\NetInspector\templates\commands\usg12004_commands.json
+2025-02-18 23:57:41,854 - usg12004_inspector - INFO - AI model initialized successfully
+2025-02-18 23:57:41,854 - usg12004_inspector - INFO - ==================================================
+2025-02-18 23:57:41,854 - usg12004_inspector - INFO - Starting to collect data of device 192.168.2.1 ...
+2025-02-18 23:57:41,855 - usg12004_inspector - INFO - ==================================================
+2025-02-18 23:57:41,855 - connect.device_connector - ERROR - Failed to connect to 192.168.2.1: Unsupported 'device_type' currently supported platforms are: 
+a10
+accedian
+adtran_os
+adva_fsp150f2
+adva_fsp150f3
+alaxala_ax26s
+alaxala_ax36s
+alcatel_aos
+alcatel_sros
+allied_telesis_awplus
+apresia_aeos
+arista_eos
+arris_cer
+aruba_aoscx
+aruba_os
+aruba_osswitch
+aruba_procurve
+audiocode_66
+audiocode_72
+audiocode_shell
+avaya_ers
+avaya_vsp
+broadcom_icos
+brocade_fastiron
+brocade_fos
+brocade_netiron
+brocade_nos
+brocade_vdx
+brocade_vyos
+calix_b6
+casa_cmts
+cdot_cros
+centec_os
+checkpoint_gaia
+ciena_saos
+cisco_apic
+cisco_asa
+cisco_ftd
+cisco_ios
+cisco_nxos
+cisco_s200
+cisco_s300
+cisco_tp
+cisco_viptela
+cisco_wlc
+cisco_xe
+cisco_xr
+cloudgenix_ion
+coriant
+dell_dnos9
+dell_force10
+dell_isilon
+dell_os10
+dell_os6
+dell_os9
+dell_powerconnect
+dell_sonic
+digi_transport
+dlink_ds
+eltex
+eltex_esr
+endace
+enterasys
+ericsson_ipos
+ericsson_mltn63
+ericsson_mltn66
+extreme
+extreme_ers
+extreme_exos
+extreme_netiron
+extreme_nos
+extreme_slx
+extreme_tierra
+extreme_vdx
+extreme_vsp
+extreme_wing
+f5_linux
+f5_ltm
+f5_tmsh
+fiberstore_fsos
+flexvnf
+fortinet
+garderos_grs
+generic
+generic_termserver
+hillstone_stoneos
+hp_comware
+hp_procurve
+huawei
+huawei_olt
+huawei_smartax
+huawei_vrp
+huawei_vrpv8
+ipinfusion_ocnos
+juniper
+juniper_junos
+juniper_screenos
+keymile
+keymile_nos
+linux
+maipu
+mellanox
+mellanox_mlnxos
+mikrotik_routeros
+mikrotik_switchos
+mrv_lx
+mrv_optiswitch
+netapp_cdot
+netgear_prosafe
+netscaler
+nokia_srl
+nokia_sros
+oneaccess_oneos
+ovs_linux
+paloalto_panos
+pluribus
+quanta_mesh
+rad_etx
+raisecom_roap
+ruckus_fastiron
+ruijie_os
+sixwind_os
+sophos_sfos
+supermicro_smis
+teldat_cit
+tplink_jetstream
+ubiquiti_edge
+ubiquiti_edgerouter
+ubiquiti_edgeswitch
+ubiquiti_unifiswitch
+vertiv_mph
+vyatta_vyos
+vyos
+watchguard_fireware
+yamaha
+zte_zxros
+zyxel_os
+2025-02-18 23:57:46,442 - connect.device_connector - ERROR - Failed to connect to 192.168.1.1: Unsupported 'device_type' currently supported platforms are: 
+a10
+accedian
+adtran_os
+adva_fsp150f2
+adva_fsp150f3
+alaxala_ax26s
+alaxala_ax36s
+alcatel_aos
+alcatel_sros
+allied_telesis_awplus
+apresia_aeos
+arista_eos
+arris_cer
+aruba_aoscx
+aruba_os
+aruba_osswitch
+aruba_procurve
+audiocode_66
+audiocode_72
+audiocode_shell
+avaya_ers
+avaya_vsp
+broadcom_icos
+brocade_fastiron
+brocade_fos
+brocade_netiron
+brocade_nos
+brocade_vdx
+brocade_vyos
+calix_b6
+casa_cmts
+cdot_cros
+centec_os
+checkpoint_gaia
+ciena_saos
+cisco_apic
+cisco_asa
+cisco_ftd
+cisco_ios
+cisco_nxos
+cisco_s200
+cisco_s300
+cisco_tp
+cisco_viptela
+cisco_wlc
+cisco_xe
+cisco_xr
+cloudgenix_ion
+coriant
+dell_dnos9
+dell_force10
+dell_isilon
+dell_os10
+dell_os6
+dell_os9
+dell_powerconnect
+dell_sonic
+digi_transport
+dlink_ds
+eltex
+eltex_esr
+endace
+enterasys
+ericsson_ipos
+ericsson_mltn63
+ericsson_mltn66
+extreme
+extreme_ers
+extreme_exos
+extreme_netiron
+extreme_nos
+extreme_slx
+extreme_tierra
+extreme_vdx
+extreme_vsp
+extreme_wing
+f5_linux
+f5_ltm
+f5_tmsh
+fiberstore_fsos
+flexvnf
+fortinet
+garderos_grs
+generic
+generic_termserver
+hillstone_stoneos
+hp_comware
+hp_procurve
+huawei
+huawei_olt
+huawei_smartax
+huawei_vrp
+huawei_vrpv8
+ipinfusion_ocnos
+juniper
+juniper_junos
+juniper_screenos
+keymile
+keymile_nos
+linux
+maipu
+mellanox
+mellanox_mlnxos
+mikrotik_routeros
+mikrotik_switchos
+mrv_lx
+mrv_optiswitch
+netapp_cdot
+netgear_prosafe
+netscaler
+nokia_srl
+nokia_sros
+oneaccess_oneos
+ovs_linux
+paloalto_panos
+pluribus
+quanta_mesh
+rad_etx
+raisecom_roap
+ruckus_fastiron
+ruijie_os
+sixwind_os
+sophos_sfos
+supermicro_smis
+teldat_cit
+tplink_jetstream
+ubiquiti_edge
+ubiquiti_edgerouter
+ubiquiti_edgeswitch
+ubiquiti_unifiswitch
+vertiv_mph
+vyatta_vyos
+vyos
+watchguard_fireware
+yamaha
+zte_zxros
+zyxel_os
+2025-02-18 23:57:46,855 - connect.device_connector - ERROR - Failed to connect to 192.168.2.1: Unsupported 'device_type' currently supported platforms are: 
+a10
+accedian
+adtran_os
+adva_fsp150f2
+adva_fsp150f3
+alaxala_ax26s
+alaxala_ax36s
+alcatel_aos
+alcatel_sros
+allied_telesis_awplus
+apresia_aeos
+arista_eos
+arris_cer
+aruba_aoscx
+aruba_os
+aruba_osswitch
+aruba_procurve
+audiocode_66
+audiocode_72
+audiocode_shell
+avaya_ers
+avaya_vsp
+broadcom_icos
+brocade_fastiron
+brocade_fos
+brocade_netiron
+brocade_nos
+brocade_vdx
+brocade_vyos
+calix_b6
+casa_cmts
+cdot_cros
+centec_os
+checkpoint_gaia
+ciena_saos
+cisco_apic
+cisco_asa
+cisco_ftd
+cisco_ios
+cisco_nxos
+cisco_s200
+cisco_s300
+cisco_tp
+cisco_viptela
+cisco_wlc
+cisco_xe
+cisco_xr
+cloudgenix_ion
+coriant
+dell_dnos9
+dell_force10
+dell_isilon
+dell_os10
+dell_os6
+dell_os9
+dell_powerconnect
+dell_sonic
+digi_transport
+dlink_ds
+eltex
+eltex_esr
+endace
+enterasys
+ericsson_ipos
+ericsson_mltn63
+ericsson_mltn66
+extreme
+extreme_ers
+extreme_exos
+extreme_netiron
+extreme_nos
+extreme_slx
+extreme_tierra
+extreme_vdx
+extreme_vsp
+extreme_wing
+f5_linux
+f5_ltm
+f5_tmsh
+fiberstore_fsos
+flexvnf
+fortinet
+garderos_grs
+generic
+generic_termserver
+hillstone_stoneos
+hp_comware
+hp_procurve
+huawei
+huawei_olt
+huawei_smartax
+huawei_vrp
+huawei_vrpv8
+ipinfusion_ocnos
+juniper
+juniper_junos
+juniper_screenos
+keymile
+keymile_nos
+linux
+maipu
+mellanox
+mellanox_mlnxos
+mikrotik_routeros
+mikrotik_switchos
+mrv_lx
+mrv_optiswitch
+netapp_cdot
+netgear_prosafe
+netscaler
+nokia_srl
+nokia_sros
+oneaccess_oneos
+ovs_linux
+paloalto_panos
+pluribus
+quanta_mesh
+rad_etx
+raisecom_roap
+ruckus_fastiron
+ruijie_os
+sixwind_os
+sophos_sfos
+supermicro_smis
+teldat_cit
+tplink_jetstream
+ubiquiti_edge
+ubiquiti_edgerouter
+ubiquiti_edgeswitch
+ubiquiti_unifiswitch
+vertiv_mph
+vyatta_vyos
+vyos
+watchguard_fireware
+yamaha
+zte_zxros
+zyxel_os
+2025-02-18 23:57:51,443 - connect.device_connector - ERROR - Failed to connect to 192.168.1.1: Unsupported 'device_type' currently supported platforms are: 
+a10
+accedian
+adtran_os
+adva_fsp150f2
+adva_fsp150f3
+alaxala_ax26s
+alaxala_ax36s
+alcatel_aos
+alcatel_sros
+allied_telesis_awplus
+apresia_aeos
+arista_eos
+arris_cer
+aruba_aoscx
+aruba_os
+aruba_osswitch
+aruba_procurve
+audiocode_66
+audiocode_72
+audiocode_shell
+avaya_ers
+avaya_vsp
+broadcom_icos
+brocade_fastiron
+brocade_fos
+brocade_netiron
+brocade_nos
+brocade_vdx
+brocade_vyos
+calix_b6
+casa_cmts
+cdot_cros
+centec_os
+checkpoint_gaia
+ciena_saos
+cisco_apic
+cisco_asa
+cisco_ftd
+cisco_ios
+cisco_nxos
+cisco_s200
+cisco_s300
+cisco_tp
+cisco_viptela
+cisco_wlc
+cisco_xe
+cisco_xr
+cloudgenix_ion
+coriant
+dell_dnos9
+dell_force10
+dell_isilon
+dell_os10
+dell_os6
+dell_os9
+dell_powerconnect
+dell_sonic
+digi_transport
+dlink_ds
+eltex
+eltex_esr
+endace
+enterasys
+ericsson_ipos
+ericsson_mltn63
+ericsson_mltn66
+extreme
+extreme_ers
+extreme_exos
+extreme_netiron
+extreme_nos
+extreme_slx
+extreme_tierra
+extreme_vdx
+extreme_vsp
+extreme_wing
+f5_linux
+f5_ltm
+f5_tmsh
+fiberstore_fsos
+flexvnf
+fortinet
+garderos_grs
+generic
+generic_termserver
+hillstone_stoneos
+hp_comware
+hp_procurve
+huawei
+huawei_olt
+huawei_smartax
+huawei_vrp
+huawei_vrpv8
+ipinfusion_ocnos
+juniper
+juniper_junos
+juniper_screenos
+keymile
+keymile_nos
+linux
+maipu
+mellanox
+mellanox_mlnxos
+mikrotik_routeros
+mikrotik_switchos
+mrv_lx
+mrv_optiswitch
+netapp_cdot
+netgear_prosafe
+netscaler
+nokia_srl
+nokia_sros
+oneaccess_oneos
+ovs_linux
+paloalto_panos
+pluribus
+quanta_mesh
+rad_etx
+raisecom_roap
+ruckus_fastiron
+ruijie_os
+sixwind_os
+sophos_sfos
+supermicro_smis
+teldat_cit
+tplink_jetstream
+ubiquiti_edge
+ubiquiti_edgerouter
+ubiquiti_edgeswitch
+ubiquiti_unifiswitch
+vertiv_mph
+vyatta_vyos
+vyos
+watchguard_fireware
+yamaha
+zte_zxros
+zyxel_os
+2025-02-18 23:57:51,443 - usg12004_inspector - ERROR - Data collection failed: Failed to connect to 192.168.1.1 after 3 attempts
+Traceback (most recent call last):
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 84, in collect_data
+    self.device_connector.connect()
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\connect\device_connector.py", line 36, in connect
+    raise ConnectionError(f"Failed to connect to {self.device_info['host']} after {self.max_retries} attempts")
+ConnectionError: Failed to connect to 192.168.1.1 after 3 attempts
+2025-02-18 23:57:51,446 - usg12004_inspector - INFO - Disconnected from device 192.168.1.1
+2025-02-18 23:57:51,447 - usg12004_inspector - ERROR - Inspection failed: Failed to connect to 192.168.1.1 after 3 attempts
+Traceback (most recent call last):
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 262, in run
+    config_data = self.collect_data()
+                  ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 84, in collect_data
+    self.device_connector.connect()
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\connect\device_connector.py", line 36, in connect
+    raise ConnectionError(f"Failed to connect to {self.device_info['host']} after {self.max_retries} attempts")
+ConnectionError: Failed to connect to 192.168.1.1 after 3 attempts
+2025-02-18 23:57:51,450 - async_inspection - ERROR - 192.168.1.1 inspecting failed: Failed to connect to 192.168.1.1 after 3 attempts
+Traceback (most recent call last):
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 292, in inspect_device_async
+    raw_config, report = await loop.run_in_executor(None, inspector.run)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alex-zhao\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 262, in run
+    config_data = self.collect_data()
+                  ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 84, in collect_data
+    self.device_connector.connect()
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\connect\device_connector.py", line 36, in connect
+    raise ConnectionError(f"Failed to connect to {self.device_info['host']} after {self.max_retries} attempts")
+ConnectionError: Failed to connect to 192.168.1.1 after 3 attempts
+2025-02-18 23:57:51,857 - connect.device_connector - ERROR - Failed to connect to 192.168.2.1: Unsupported 'device_type' currently supported platforms are: 
+a10
+accedian
+adtran_os
+adva_fsp150f2
+adva_fsp150f3
+alaxala_ax26s
+alaxala_ax36s
+alcatel_aos
+alcatel_sros
+allied_telesis_awplus
+apresia_aeos
+arista_eos
+arris_cer
+aruba_aoscx
+aruba_os
+aruba_osswitch
+aruba_procurve
+audiocode_66
+audiocode_72
+audiocode_shell
+avaya_ers
+avaya_vsp
+broadcom_icos
+brocade_fastiron
+brocade_fos
+brocade_netiron
+brocade_nos
+brocade_vdx
+brocade_vyos
+calix_b6
+casa_cmts
+cdot_cros
+centec_os
+checkpoint_gaia
+ciena_saos
+cisco_apic
+cisco_asa
+cisco_ftd
+cisco_ios
+cisco_nxos
+cisco_s200
+cisco_s300
+cisco_tp
+cisco_viptela
+cisco_wlc
+cisco_xe
+cisco_xr
+cloudgenix_ion
+coriant
+dell_dnos9
+dell_force10
+dell_isilon
+dell_os10
+dell_os6
+dell_os9
+dell_powerconnect
+dell_sonic
+digi_transport
+dlink_ds
+eltex
+eltex_esr
+endace
+enterasys
+ericsson_ipos
+ericsson_mltn63
+ericsson_mltn66
+extreme
+extreme_ers
+extreme_exos
+extreme_netiron
+extreme_nos
+extreme_slx
+extreme_tierra
+extreme_vdx
+extreme_vsp
+extreme_wing
+f5_linux
+f5_ltm
+f5_tmsh
+fiberstore_fsos
+flexvnf
+fortinet
+garderos_grs
+generic
+generic_termserver
+hillstone_stoneos
+hp_comware
+hp_procurve
+huawei
+huawei_olt
+huawei_smartax
+huawei_vrp
+huawei_vrpv8
+ipinfusion_ocnos
+juniper
+juniper_junos
+juniper_screenos
+keymile
+keymile_nos
+linux
+maipu
+mellanox
+mellanox_mlnxos
+mikrotik_routeros
+mikrotik_switchos
+mrv_lx
+mrv_optiswitch
+netapp_cdot
+netgear_prosafe
+netscaler
+nokia_srl
+nokia_sros
+oneaccess_oneos
+ovs_linux
+paloalto_panos
+pluribus
+quanta_mesh
+rad_etx
+raisecom_roap
+ruckus_fastiron
+ruijie_os
+sixwind_os
+sophos_sfos
+supermicro_smis
+teldat_cit
+tplink_jetstream
+ubiquiti_edge
+ubiquiti_edgerouter
+ubiquiti_edgeswitch
+ubiquiti_unifiswitch
+vertiv_mph
+vyatta_vyos
+vyos
+watchguard_fireware
+yamaha
+zte_zxros
+zyxel_os
+2025-02-18 23:57:51,857 - usg12004_inspector - ERROR - Data collection failed: Failed to connect to 192.168.2.1 after 3 attempts
+Traceback (most recent call last):
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 84, in collect_data
+    self.device_connector.connect()
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\connect\device_connector.py", line 36, in connect
+    raise ConnectionError(f"Failed to connect to {self.device_info['host']} after {self.max_retries} attempts")
+ConnectionError: Failed to connect to 192.168.2.1 after 3 attempts
+2025-02-18 23:57:51,857 - usg12004_inspector - INFO - Disconnected from device 192.168.2.1
+2025-02-18 23:57:51,857 - usg12004_inspector - ERROR - Inspection failed: Failed to connect to 192.168.2.1 after 3 attempts
+Traceback (most recent call last):
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 262, in run
+    config_data = self.collect_data()
+                  ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 84, in collect_data
+    self.device_connector.connect()
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\connect\device_connector.py", line 36, in connect
+    raise ConnectionError(f"Failed to connect to {self.device_info['host']} after {self.max_retries} attempts")
+ConnectionError: Failed to connect to 192.168.2.1 after 3 attempts
+2025-02-18 23:57:51,858 - async_inspection - ERROR - 192.168.2.1 inspecting failed: Failed to connect to 192.168.2.1 after 3 attempts
+Traceback (most recent call last):
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 292, in inspect_device_async
+    raw_config, report = await loop.run_in_executor(None, inspector.run)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alex-zhao\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 262, in run
+    config_data = self.collect_data()
+                  ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\inspection\huawei\usg12004_inspection.py", line 84, in collect_data
+    self.device_connector.connect()
+  File "C:\Users\alex-zhao\PycharmProjects\NetInspector\connect\device_connector.py", line 36, in connect
+    raise ConnectionError(f"Failed to connect to {self.device_info['host']} after {self.max_retries} attempts")
+ConnectionError: Failed to connect to 192.168.2.1 after 3 attempts
+2025-02-18 23:57:51,859 - main_async - INFO - ==================================================
+2025-02-18 23:57:51,859 - main_async - INFO - Tasks are done！Summary of results:
+2025-02-18 23:57:51,859 - main_async - INFO - ==================================================
+2025-02-18 23:57:51,859 - main_async - INFO - Total devices: 2
+2025-02-18 23:57:51,859 - main_async - INFO - Success count: 0
+2025-02-18 23:57:51,859 - main_async - INFO - Failure count: 2
+2025-02-18 23:57:51,859 - main_async - INFO - Device 192.168.1.1: status: failed
+2025-02-18 23:57:51,859 - main_async - INFO - Error: Failed to connect to 192.168.1.1 after 3 attempts
+2025-02-18 23:57:51,859 - main_async - INFO - Device 192.168.2.1: status: failed
+2025-02-18 23:57:51,859 - main_async - INFO - Error: Failed to connect to 192.168.2.1 after 3 attempts

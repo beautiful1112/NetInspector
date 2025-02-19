@@ -1,0 +1,22 @@
+{
+  "basic": [
+    "screen-length 0 temporary",
+    "display current-configuration all",
+    "display version"
+  ],
+  "security": [
+    "display security risk",
+    "display security-policy rule all",
+    "display security-policy statistics"
+  ],
+  "network": [
+    "display interface brief",
+    "display ip routing-table",
+    "display nat-policy rule all",
+    "display nat statistics"
+  ],
+  "monitoring": [
+    "display cpu-usage",
+    "display memory"
+  ]
+}
