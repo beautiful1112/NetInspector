@@ -39,16 +39,16 @@ LANGCHAIN_DEBUG = False
 # AI API settings
 AI_SETTINGS = {
     'deepseek': {
-        'api_base': 'your-api-base-url',
-        'api_key': 'your-api-key',
-        'model': 'your-model-name',
+        'api_base': 'https://api.siliconflow.cn/v1',
+        'api_key': '',
+        'model': 'deepseek-ai/DeepSeek-V3',
     }
 }
 
 # Log settings
 LOG_SETTINGS = {
     'log_dir': 'logs',
-    'log_level': 'INFO',
+    'log_level': 'DEBUG',
     'log_format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 }
 

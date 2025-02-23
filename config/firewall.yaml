@@ -1,13 +1,8 @@
 firewall:
   credential_group: firewall_admin
   devices:
-  - name: "cisco-asa"
-    ip: 192.168.1.1
-    vendor: cisco
-    model: asa
-    type: ios
-  - name: "huawei-usg"
-    ip: 192.168.2.1
+  - name: "huawei-usg-01"
+    ip: 172.18.10.60
     vendor: huawei
-    model: usg12004
-    type: vrp
+    model: usg6000
+    type: huawei

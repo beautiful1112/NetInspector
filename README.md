@@ -59,7 +59,7 @@ devices:
 
 2. Run the inspection script
 ```bash
-python inspection/huawei/usg12004_inspection.py
+python inspection/generic_inspector.py
 ```
 
 ### Project Structure
@@ -68,8 +68,7 @@ NetInspector/
 ├── connect/                 # Connection handling
 │   └── device_connector.py
 ├── inspection/             # Inspection modules
-│   └── huawei/
-│       └── usg12004_inspection.py
+│   └──generic_inspector.py
 ├── output/                 # Output directory
 │   ├── raw_configs/       # Raw configuration files
 │   └── reports/           # Analysis reports
@@ -166,7 +165,7 @@ devices:
 
 2. 运行巡检脚本
 ```bash
-python inspection/huawei/usg12004_inspection.py
+python inspection/generic_inspector.py
 ```
 
 ### 项目结构
@@ -175,8 +174,7 @@ NetInspector/
 ├── connect/                 # 连接处理
 │   └── device_connector.py
 ├── inspection/             # 巡检模块
-│   └── huawei/
-│       └── usg12004_inspection.py
+│   └── generic_inspector.py
 ├── output/                 # 输出目录
 │   ├── raw_configs/       # 原始配置文件
 │   └── reports/           # 分析报告
