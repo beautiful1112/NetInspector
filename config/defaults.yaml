@@ -1,0 +1,10 @@
+---
+username: admin
+password: Admin@1234
+
+
+logging:
+  enabled: true
+  level: INFO
+  file: logs/nornir.log
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s" 

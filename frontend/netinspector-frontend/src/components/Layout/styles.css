@@ -1,0 +1,130 @@
+.ant-layout-sider {
+  box-shadow: 2px 0 6px rgba(0,21,41,.35);
+}
+
+.ant-layout-sider .ant-menu-dark {
+  background: #2f4050;
+}
+
+.ant-menu-dark .ant-menu-item-selected {
+  background-color: #293846 !important;
+}
+
+.ant-menu-dark .ant-menu-item:hover {
+  background-color: #293846;
+}
+
+.site-layout-background {
+  background: #fff;
+}
+
+.ant-layout-content {
+  margin: 24px 16px;
+  padding: 24px;
+  background: #fff;
+  min-height: 280px;
+}
+
+.header-right {
+  float: right;
+  margin-right: 24px;
+}
+
+.logo {
+  height: 64px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ant-primary-color);
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.logo img {
+  height: 32px;
+  width: 32px;
+}
+
+.app-header {
+  padding: 0 24px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 4px rgba(0,21,41,0.08);
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.trigger {
+  font-size: 18px;
+  cursor: pointer;
+  transition: color 0.3s;
+  padding: 0 12px;
+}
+
+.trigger:hover {
+  color: var(--ant-primary-color);
+}
+
+.page-title {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.header-icon {
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.header-icon:hover {
+  color: var(--ant-primary-color);
+}
+
+.notification-badge {
+  cursor: pointer;
+}
+
+.user-avatar {
+  cursor: pointer;
+  background: var(--ant-primary-color);
+}
+
+.app-content {
+  margin: 24px;
+  padding: 24px;
+  background: #fff;
+  border-radius: 8px;
+  min-height: 280px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .app-content {
+    margin: 12px;
+    padding: 16px;
+  }
+  
+  .header-right {
+    gap: 16px;
+  }
+} 

@@ -1,0 +1,97 @@
+.settings-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.settings-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.settings-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  gap: 16px;
+}
+
+.settings-submit {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.settings-section {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.settings-footer {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #f0f0f0;
+}
+
+/* Tab customization */
+.ant-tabs-nav {
+  margin-bottom: 24px;
+}
+
+/* Form item spacing */
+.ant-form-item {
+  margin-bottom: 24px;
+}
+
+/* Input number full width */
+.ant-input-number {
+  width: 200px;
+}
+
+/* Switch alignment */
+.ant-switch {
+  margin: 4px 0;
+}
+
+/* Card title */
+.ant-card-head-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .settings-container {
+    padding: 16px;
+  }
+
+  .ant-input-number {
+    width: 100%;
+  }
+
+  .settings-submit {
+    text-align: center;
+  }
+
+  .ant-form-item {
+    margin-bottom: 16px;
+  }
+}
+
+/* Form styling */
+.ant-input[disabled] {
+  color: rgba(0, 0, 0, 0.65);
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+/* Tab styling */
+.ant-tabs-tab {
+  padding: 12px 16px !important;
+} 

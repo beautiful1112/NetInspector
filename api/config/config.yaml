@@ -1,0 +1,15 @@
+inventory:
+  options:
+    defaults_file: config/defaults.yaml
+    group_file: config/groups.yaml
+    host_file: config/hosts.yaml
+  plugin: SimpleInventory
+logging:
+  enabled: true
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  level: INFO
+  log_file: logs/nornir.log
+runner:
+  options:
+    num_workers: 10
+  plugin: threaded

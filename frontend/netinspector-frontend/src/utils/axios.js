@@ -1,12 +1,13 @@
 // src/utils/axios.js
 import axios from 'axios'
+import { message } from 'antd'
 
 const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
 
 // 创建axios实例
 const instance = axios.create({
   baseURL,
-  timeout: 10000,
+  timeout: 120000,
   headers: {
     'Content-Type': 'application/json',
     'X-Requested-With': 'XMLHttpRequest'
@@ -34,32 +35,8 @@ instance.interceptors.response.use(
   },
   error => {
     console.error('Response error:', error)
-    // 处理错误响应
-    if (error.response) {
-      switch (error.response.status) {
-        case 400:
-          console.error('Bad request:', error.response.data)
-          break
-        case 401:
-          console.error('Unauthorized:', error.response.data)
-          break
-        case 403:
-          console.error('Forbidden:', error.response.data)
-          break
-        case 404:
-          console.error('Not found:', error.response.data)
-          break
-        case 500:
-          console.error('Server error:', error.response.data)
-          break
-        default:
-          console.error('Error:', error.response.data)
-      }
-    } else if (error.request) {
-      console.error('No response received:', error.request)
-    } else {
-      console.error('Error setting up request:', error.message)
-    }
+    const errorMessage = error.response?.data?.detail || error.message
+    message.error(errorMessage)
     return Promise.reject(error)
   }
 )

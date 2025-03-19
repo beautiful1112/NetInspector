@@ -1,0 +1,480 @@
+.inspector-container {
+  padding: 24px;
+  min-height: 100vh;
+  background: #f0f2f5;
+}
+
+.main-card {
+  margin-bottom: 24px;
+}
+
+.selection-card {
+  margin-bottom: 16px;
+}
+
+.select-item {
+  margin-bottom: 16px;
+}
+
+.terminal {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  padding: 12px;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace;
+  height: 400px;
+  overflow-y: auto;
+}
+
+.empty-logs {
+  color: #666;
+  text-align: center;
+  padding: 20px;
+}
+
+.log-line {
+  margin: 4px 0;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.log-time {
+  color: #888;
+  margin-right: 8px;
+}
+
+.log-line.info .log-message {
+  color: #ffffff;
+}
+
+.log-line.success .log-message {
+  color: #52c41a;
+}
+
+.log-line.error .log-message {
+  color: #ff4d4f;
+}
+
+/* 自定义滚动条 */
+.terminal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal::-webkit-scrollbar-track {
+  background: #2c2c2c;
+}
+
+.terminal::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+.terminal::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+  .inspector-container {
+    padding: 12px;
+  }
+}
+
+.description {
+  display: block;
+  margin-bottom: 24px;
+}
+
+.config-tabs {
+  margin-top: 24px;
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.upload-row {
+  margin-top: 24px;
+}
+
+.upload-card {
+  height: 100%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: all 0.3s;
+}
+
+.upload-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.upload-dragger {
+  padding: 16px;
+  margin-bottom: 16px;
+  background: #fafafa;
+  border: 2px dashed #e8e8e8;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.upload-dragger:hover {
+  border-color: #1890ff;
+}
+
+.ant-upload-drag-icon {
+  color: #40a9ff;
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.ant-upload-text {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.ant-upload-hint {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.help-text {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.action-section {
+  margin-top: 32px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.validation-alert {
+  margin-top: 16px;
+}
+
+.host-selection-section {
+  margin-top: 24px;
+}
+
+.host-selection-section .ant-card {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.ant-table-wrapper {
+  background: #fff;
+  border-radius: 8px;
+}
+
+.ant-select-selector {
+  border-radius: 4px !important;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 48px;
+  background: #fafafa;
+  border-radius: 8px;
+}
+
+.empty-state .ant-spin {
+  margin-bottom: 16px;
+}
+
+.hosts-table-card {
+  margin-top: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.inspection-alert {
+  margin-top: 16px;
+}
+
+.results-card {
+  margin-top: 24px;
+}
+
+.result-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.result-item .ant-space {
+  margin-top: 8px;
+  margin-left: 24px;
+}
+
+/* Empty state styling */
+.ant-empty {
+  margin: 32px 0;
+}
+
+.ant-empty-description {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .inspector-container {
+    padding: 16px;
+  }
+
+  .upload-row {
+    margin-top: 16px;
+  }
+
+  .action-section {
+    margin-top: 24px;
+  }
+
+  .upload-card {
+    margin-bottom: 16px;
+  }
+
+  .ant-card-extra {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ant-card-extra .ant-select {
+    width: 100% !important;
+    margin-bottom: 8px;
+  }
+
+  .hosts-table-card {
+    margin-top: 16px;
+  }
+
+  .table-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .table-header button {
+    width: 100%;
+  }
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  gap: 16px;
+}
+
+/* Terminal styles */
+.terminal-collapse {
+  margin-top: 16px;
+  background: #1e1e1e;
+  border: none;
+}
+
+.terminal-collapse .ant-collapse-header {
+  color: #fff !important;
+  background: #2d2d2d;
+  border-radius: 8px 8px 0 0 !important;
+}
+
+.terminal-collapse .ant-collapse-content {
+  background: #1e1e1e;
+  border: none;
+}
+
+.terminal-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #666;
+}
+
+.terminal-line {
+  padding: 4px 0;
+  line-height: 1.4;
+  font-size: 14px;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.terminal-timestamp {
+  color: #666;
+  margin-right: 8px;
+}
+
+.terminal-message {
+  color: #fff;
+}
+
+.terminal-info .terminal-message {
+  color: #fff;
+}
+
+.terminal-success .terminal-message {
+  color: #52c41a;
+}
+
+.terminal-error .terminal-message {
+  color: #ff4d4f;
+}
+
+.terminal-warning .terminal-message {
+  color: #faad14;
+}
+
+/* Scrollbar styles for the terminal */
+.terminal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal::-webkit-scrollbar-track {
+  background: #2c2c2c;
+}
+
+.terminal::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+.terminal::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+/* Responsive design for terminal */
+@media (max-width: 768px) {
+  .terminal {
+    height: 200px;
+  }
+  
+  .terminal-line {
+    font-size: 12px;
+  }
+}
+
+/* Template section styles */
+.templates-card {
+  margin-top: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.template-section {
+  padding: 16px;
+  background: #fafafa;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.template-section:last-child {
+  margin-bottom: 0;
+}
+
+.template-section .ant-upload {
+  margin-top: 16px;
+}
+
+.template-section .ant-select {
+  margin-bottom: 16px;
+}
+
+.template-section h4 {
+  margin-bottom: 16px;
+}
+
+/* Template file list styles */
+.file-list {
+  margin-top: 16px;
+}
+
+.file-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.file-list-item:last-child {
+  border-bottom: none;
+}
+
+/* Responsive design for templates */
+@media (max-width: 768px) {
+  .template-section {
+    padding: 12px;
+  }
+
+  .template-section .ant-upload {
+    width: 100%;
+  }
+
+  .template-section .ant-upload button {
+    width: 100%;
+  }
+
+  .template-section .ant-select {
+    width: 100% !important;
+  }
+}
+
+.log-line {
+  margin: 4px 0;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.log-time {
+  color: #888;
+  margin-right: 8px;
+}
+
+.log-line.info .log-message {
+  color: #ffffff;
+}
+
+.log-line.success .log-message {
+  color: #52c41a;
+}
+
+.log-line.error .log-message {
+  color: #ff4d4f;
+}
+
+.logs-panel {
+  margin-top: 16px;
+}
+
+/* 在现有样式中添加 */
+.devices-table {
+  margin-bottom: 16px;
+}
+
+.devices-table .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 600;
+}
+
+.devices-table .ant-table-tbody > tr:hover > td {
+  background: #f5f5f5;
+}
+
+.devices-table .ant-table-row-selected > td {
+  background: #e6f7ff;
+} 

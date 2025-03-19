@@ -3,56 +3,71 @@ import logging
 import os
 import sys
 from datetime import datetime
-from utils.settings import BASE_DIR, LOG_SETTINGS, LANGCHAIN_DEBUG, ENABLE_CONSOLE_OUTPUT
+from pathlib import Path
+import yaml
 
-# Using LANGCHAIN_DEBUG from settings to control the debug mode
-DEBUG_MODE = LANGCHAIN_DEBUG
-
-# Make log_level(string) from LOG_SETTINGS trans to levels of logging
-log_level = getattr(logging, LOG_SETTINGS.get('log_level', 'INFO').upper(), logging.INFO)
-
-# Create log directory if it doesn't exist
-LOG_DIR_ABS = os.path.join(BASE_DIR, LOG_SETTINGS.get('log_dir', 'logs'))
-os.makedirs(LOG_DIR_ABS, exist_ok=True)
-
-# Get the name of the main script
-main_script = os.path.basename(sys.argv[0])
-main_script_name = os.path.splitext(main_script)[0]
-LOG_FILE = os.path.join(LOG_DIR_ABS, f"{main_script_name}_{datetime.now().strftime('%Y%m%d')}.log")
-
-# Console filter: only allow attribute of True in 'print_console' to be output
-class ConsoleFilter(logging.Filter):
-    def filter(self, record: logging.LogRecord) -> bool:
-        return getattr(record, 'print_console', False)
-
-# Custom console formatter: Detailed exception information is not output in non-debug mode
-class MinimalConsoleFormatter(logging.Formatter):
-    def format(self, record):
-        if not DEBUG_MODE and record.exc_info:
-            record.exc_info = None
-            record.exc_text = None
-        return super().format(record)
-
-# Config root logger (only initial once)
-if not logging.getLogger().hasHandlers():
-    root_logger = logging.getLogger()
-    root_logger.setLevel(log_level)
-
-    # File handler: Output all logs to log file (including all traceback)
-    file_handler = logging.FileHandler(LOG_FILE, encoding='utf-8')
-    file_handler.setFormatter(logging.Formatter(LOG_SETTINGS.get('log_format')))
-    root_logger.addHandler(file_handler)
-
-    # Console handler: Output only when ENABLE_CONSOLE_OUTPUT is True, and use MinimalConsoleFormatter
-    if ENABLE_CONSOLE_OUTPUT:
-        console_handler = logging.StreamHandler()
-        console_handler.setLevel(log_level)
-        console_handler.setFormatter(MinimalConsoleFormatter(LOG_SETTINGS.get('log_format')))
-        console_handler.addFilter(ConsoleFilter())
-        root_logger.addHandler(console_handler)
+def load_settings():
+    """Load settings from YAML file"""
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(current_dir)
+    settings_file = os.path.join(project_root, "utils", "settings.yaml")
+    try:
+        with open(settings_file, 'r', encoding='utf-8') as f:
+            return yaml.safe_load(f)
+    except Exception as e:
+        # 如果无法加载设置，使用默认值
+        return {
+            'logging': {
+                'log_dir': 'logs',
+                'log_level': 'DEBUG',
+                'log_format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                'enable_console': True
+            },
+            'langchain': {
+                'debug': True,
+                'verbose': True
+            },
+            'directories': {
+                'raw_configs': 'output/raw_configs',
+                'reports': 'output/reports'
+            }
+        }
 
 def get_logger(name: str) -> logging.Logger:
-    """
-    Obtain the logger object with the specified name.
-    """
-    return logging.getLogger(name)
+    """Get a logger instance with the specified name"""
+    settings = load_settings()
+    
+    # 直接从 logging 配置中获取值
+    log_dir = settings['logging']['log_dir']
+    log_level = settings['logging']['log_level']
+    log_format = settings['logging']['log_format']
+    enable_console = settings['logging'].get('enable_console', True)
+    
+    # Create logger
+    logger = logging.getLogger(name)
+    logger.setLevel(log_level)
+
+    # Create formatter
+    formatter = logging.Formatter(log_format)
+
+    # Ensure log directory exists
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(current_dir)
+    log_dir = os.path.join(project_root, log_dir)
+    os.makedirs(log_dir, exist_ok=True)
+
+    # 防止重复添加 handlers
+    if not logger.handlers:
+        # Create file handler
+        log_file = os.path.join(log_dir, f"{name}.log")
+        file_handler = logging.FileHandler(log_file, encoding='utf-8')
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
+
+        # Add console handler if enabled
+        if enable_console:
+            console_handler = logging.StreamHandler()
+            console_handler.setFormatter(formatter)
+            logger.addHandler(console_handler)
+
+    return logger

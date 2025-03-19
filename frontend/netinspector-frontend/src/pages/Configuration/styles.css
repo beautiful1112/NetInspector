@@ -1,0 +1,122 @@
+.config-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.description {
+  display: block;
+  margin-bottom: 24px;
+}
+
+.upload-row {
+  margin-top: 24px;
+}
+
+.upload-card {
+  height: 100%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: all 0.3s;
+}
+
+.upload-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.upload-card .ant-card-extra {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 200px;
+}
+
+.upload-card .ant-select {
+  min-width: 150px;
+}
+
+.upload-dragger {
+  padding: 16px;
+  margin-bottom: 16px;
+  background: #fafafa;
+  border: 2px dashed #e8e8e8;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.upload-dragger:hover {
+  border-color: #1890ff;
+}
+
+.ant-upload-drag-icon {
+  color: #40a9ff;
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.ant-upload-text {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.ant-upload-hint {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.help-text {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.file-status {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #52c41a;
+}
+
+.action-section {
+  margin-top: 32px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.validation-alert {
+  margin-top: 16px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .config-container {
+    padding: 16px;
+  }
+
+  .upload-row {
+    margin-top: 16px;
+  }
+
+  .action-section {
+    margin-top: 24px;
+  }
+
+  .upload-card {
+    margin-bottom: 16px;
+  }
+
+  .upload-card .ant-card-extra {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .upload-card .ant-card-extra .ant-select {
+    width: 100% !important;
+    margin-bottom: 8px;
+  }
+}

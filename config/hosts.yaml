@@ -1,0 +1,30 @@
+---
+firewall01:
+  hostname: 172.18.10.100
+  groups:
+    - huawei
+  data:
+    vendor: huawei
+    model: usg6000v
+
+switch01:
+  hostname: 172.18.10.200
+  groups:
+    - cisco
+  data:
+    vendor: cisco
+    model: catalyst-9300
+
+wireless01:
+  hostname: 192.168.1.20
+  groups:
+    - wireless
+  data:
+    vendor: aruba
+    model: ap-515
+
+router1:
+  hostname: 192.168.1.1
+  platform: ios
+  groups:
+    - cisco_ios 

@@ -1,0 +1,90 @@
+---
+firewalls:
+  platform: fortinet
+  connection_options:
+    netmiko:
+      platform: fortinet
+      extras:
+        conn_timeout: 10
+        auth_timeout: 10
+    napalm:
+      platform: fortios
+
+switches:
+  platform: ios
+  connection_options:
+    netmiko:
+      platform: cisco_ios
+      extras:
+        conn_timeout: 10
+        auth_timeout: 10
+    napalm:
+      platform: ios
+
+wireless:
+  platform: aruba
+  connection_options:
+    netmiko:
+      platform: aruba_os
+      extras:
+        conn_timeout: 10
+        auth_timeout: 10
+
+huawei:
+  platform: huawei
+  connection_options:
+    netmiko:
+      platform: huawei
+      extras:
+        timeout: 60
+        global_delay_factor: 1
+        conn_timeout: 20
+        auth_timeout: 20
+        session_log: logs/session.log
+        fast_cli: false
+    napalm:
+      platform: huawei_vrp
+      extras:
+        optional_args:
+          transport: ssh
+          timeout: 60
+
+cisco:
+  platform: ios
+  connection_options:
+    netmiko:
+      platform: cisco_ios
+      extras:
+        timeout: 60
+        global_delay_factor: 1
+        conn_timeout: 20
+        auth_timeout: 20
+        session_log: logs/session.log
+        fast_cli: false
+    napalm:
+      platform: ios
+      extras:
+        optional_args:
+          transport: ssh
+          timeout: 60
+
+h3c:
+  platform: hp_comware
+  connection_options:
+    netmiko:
+      platform: hp_comware
+      extras:
+        timeout: 60
+        global_delay_factor: 1
+        conn_timeout: 20
+        auth_timeout: 20
+        session_log: logs/session.log
+        fast_cli: false
+
+cisco_ios:
+  platform: ios
+  connection_options:
+    netmiko:
+      platform: cisco_ios
+      extras:
+        secret: your_enable_secret 

@@ -1,9 +1,0 @@
-wireless:
-  credential_group: wireless_admin
-  devices:
-  - name:
-    ip:
-    vendor:
-    model:
-    type:
-

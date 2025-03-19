@@ -1,0 +1,20 @@
+ai_config:
+  api_base: https://api.siliconflow.cn/v1/
+  api_key: 
+  model: Pro/deepseek-ai/DeepSeek-V3
+connection:
+  command_timeout: 120
+  connect_timeout: 60
+  retry_interval: 10
+  retry_times: 3
+directories:
+  raw_configs: output/raw_configs
+  reports: output/reports
+langchain:
+  debug: true
+  verbose: true
+logging:
+  enable_console: true
+  log_dir: logs
+  log_format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  log_level: DEBUG

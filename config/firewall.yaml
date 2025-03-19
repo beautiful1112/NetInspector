@@ -1,8 +1,0 @@
-firewall:
-  credential_group: firewall_admin
-  devices:
-  - name: "huawei-usg-01"
-    ip: 172.18.10.60
-    vendor: huawei
-    model: usg6000
-    type: huawei

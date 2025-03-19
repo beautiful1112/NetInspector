@@ -1,22 +1,24 @@
 # api/main.py
+import os
+import sys
+import re
+from pathlib import Path
+
+# Add project root directory to Python path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir)
+sys.path.append(project_root)
+
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel  # 添加这个导入
-from operation.ai_operator import run_ai_operation
+from pydantic import BaseModel
 from inspection.generic_inspector import GenericInspector
-from utils.config_loader import ConfigLoader
-from utils.settings import OUTPUT_DIRS, BASE_DIR
-from utils.excel_to_yaml import excel_to_yaml
-import os
-import shutil
-import json
-import yaml
-from typing import Dict, List, Optional
-from datetime import datetime
 from utils.logger import get_logger
-
-# Configure logging
+from nornir import InitNornir
+import yaml
+from typing import Dict, List
+from datetime import datetime
 
 logger = get_logger(__name__)
 
@@ -47,76 +49,8 @@ class InspectionRequest(BaseModel):
     promptTxt: str
 
 # File upload endpoints
-@app.post("/api/upload/excel")
-async def upload_excel(file: UploadFile = File(...)):
-    try:
-        file_path = os.path.join("config", file.filename)
-        os.makedirs(os.path.dirname(file_path), exist_ok=True)
-        with open(file_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-        return JSONResponse(content={"message": f"Excel file {file.filename} uploaded successfully", "path": file_path})
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-@app.post("/api/upload/excel-to-yaml")  # 新增接口
-async def upload_excel_to_yaml(file: UploadFile = File(...)):
-    """
-    Upload an Excel file and convert it to YAML files, saving to config directory.
-
-    Args:
-        file: Excel file to upload
-
-    Returns:
-        JSON response with success message or error
-    """
-    try:
-        # Read file content as bytes
-        excel_data = await file.read()
-        yaml_file_path, error_message = excel_to_yaml(excel_data)
-        if error_message:
-            raise HTTPException(status_code=400, detail=error_message)
-        return JSONResponse(content={"message": f"Excel converted to YAML successfully, files saved at {yaml_file_path}", "path": yaml_file_path})
-    except Exception as e:
-        logger.error(f"Error converting Excel to YAML: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/api/upload/credential")
-async def upload_credential(file: UploadFile = File(...)):
-    try:
-        # 验证文件类型
-        if not file.filename.endswith(('.yaml', '.yml')):
-            raise HTTPException(
-                status_code=400,
-                detail="Invalid file type. Only YAML files are allowed."
-            )
-
-        # 确保目录存在
-        upload_dir = os.path.join("config")
-        os.makedirs(upload_dir, exist_ok=True)
-
-        # 生成安全的文件名
-        file_path = os.path.join(upload_dir, file.filename)
-
-        # 保存文件
-        try:
-            with open(file_path, "wb") as buffer:
-                content = await file.read()
-                buffer.write(content)
-        except Exception as e:
-            logger.error(f"Error saving file: {str(e)}")
-            raise HTTPException(status_code=500, detail="Failed to save file")
-
-        return JSONResponse(
-            content={
-                "message": f"YAML credential file {file.filename} uploaded successfully",
-                "path": file_path
-            },
-            status_code=200
-        )
-    except Exception as e:
-        logger.error(f"Upload error: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/api/upload/commands")
 async def upload_commands(file: UploadFile = File(...)):
@@ -140,124 +74,276 @@ async def upload_prompt(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-# Inspection endpoint
-@app.post("/api/inspection/start")
-async def start_inspection(request: InspectionRequest):
-    """启动设备检查流程"""
-    logger.info("=" * 50)
-    logger.info("收到设备检查请求")
-    logger.info(f"请求参数: {request.dict()}")
-    logger.info("=" * 50)
-
+@app.post("/api/upload-config")
+async def upload_config(file: UploadFile = File(...), type: str = Form(...)):
+    """Upload configuration file"""
     try:
-        # 提取设备类型（从deviceYaml文件名）
-        device_type = request.deviceYaml.split('/')[-1].replace('.yaml', '')
-        logger.info(f"设备类型: {device_type}")
+        # Use relative path for config directory
+        config_dir = "config"  # Changed to relative path
+        if type == "hosts":
+            filename = "hosts.yaml"
+        elif type == "groups":
+            filename = "groups.yaml"
+        elif type == "defaults":
+            filename = "defaults.yaml"
+        else:
+            raise HTTPException(status_code=400, detail="Invalid file type")
 
-        # 获取设备列表
-        try:
-            devices = ConfigLoader.get_devices(device_type)
-            if not devices:
-                logger.error(f"未找到设备类型 {device_type} 的配置")
-                raise HTTPException(
-                    status_code=404,
-                    detail=f"未找到设备类型: {device_type}"
-                )
-            logger.info(f"找到 {len(devices)} 个设备配置")
+        # Ensure config directory exists
+        os.makedirs(config_dir, exist_ok=True)
+        file_path = os.path.join(config_dir, filename)
 
-        except Exception as e:
-            logger.error(f"获取设备列表失败: {str(e)}")
-            raise HTTPException(
-                status_code=500,
-                detail=f"获取设备列表失败: {str(e)}"
-            )
+        content = await file.read()
+        # Validate YAML format
+        yaml.safe_load(content)
+        
+        with open(file_path, "wb") as f:
+            f.write(content)
+        
+        # Return relative path
+        return JSONResponse(
+            content={
+                "success": True,
+                "message": f"{filename} uploaded successfully",
+                "path": f"config/{filename}"  # Use forward slashes for consistency
+            }
+        )
+    except yaml.YAMLError:
+        raise HTTPException(status_code=400, detail="Invalid YAML format")
+    except Exception as e:
+        logger.error(f"Upload error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
-        # 检查所需文件是否存在
-        required_files = {
-            'commands': os.path.join(BASE_DIR, request.commandJson),
-            'prompt': os.path.join(BASE_DIR, request.promptTxt)
+# 添加新的设置加载函数
+def load_settings():
+    """Load settings from YAML file"""
+    settings_file = os.path.join(project_root, "utils", "settings.yaml")
+    try:
+        with open(settings_file, 'r', encoding='utf-8') as f:
+            return yaml.safe_load(f)
+    except Exception as e:
+        logger.error(f"Error loading settings: {str(e)}")
+        raise
+
+# 修改 get_settings 端点
+@app.get("/api/settings")
+async def get_settings():
+    """Get current settings from settings.yaml"""
+    try:
+        settings = load_settings()
+        return JSONResponse(
+            content=settings,
+            headers={"Cache-Control": "no-cache"}
+        )
+    except Exception as e:
+        logger.error(f"Error loading settings: {str(e)}")
+        return JSONResponse(
+            status_code=500,
+            content={"error": f"Failed to load settings: {str(e)}"}
+        )
+
+# 修改 save_settings 端点
+@app.post("/api/settings")
+async def save_settings(settings: dict):
+    """Save settings to settings.yaml"""
+    try:
+        settings_file = os.path.join(project_root, "utils", "settings.yaml")
+        
+        # 确保目录存在
+        os.makedirs(os.path.dirname(settings_file), exist_ok=True)
+        
+        # 保存设置
+        with open(settings_file, 'w', encoding='utf-8') as f:
+            yaml.dump(settings, f, default_flow_style=False, allow_unicode=True)
+        
+        return JSONResponse(
+            content={"message": "Settings saved successfully"},
+            headers={"Cache-Control": "no-cache"}
+        )
+    except Exception as e:
+        logger.error(f"Error saving settings: {str(e)}")
+        return JSONResponse(
+            status_code=500,
+            content={"error": f"Failed to save settings: {str(e)}"}
+        )
+
+@app.post("/api/validate-configs")
+async def validate_configs():
+    """Validate Nornir configuration files"""
+    try:
+        settings = load_settings()
+        config_dir = os.path.join(project_root, "config")
+        logs_dir = os.path.join(project_root, settings['logging']['log_dir'])
+        
+        # 确保目录存在
+        os.makedirs(config_dir, exist_ok=True)
+        os.makedirs(logs_dir, exist_ok=True)
+        
+        # 创建或更新 config.yaml
+        config_yaml_path = os.path.join(config_dir, "config.yaml")
+        
+        # 使用正确的日志配置结构
+        config_content = {
+            "inventory": {
+                "plugin": "SimpleInventory",
+                "options": {
+                    "host_file": "config/hosts.yaml",
+                    "group_file": "config/groups.yaml",
+                    "defaults_file": "config/defaults.yaml"
+                }
+            },
+            "runner": {
+                "plugin": "threaded",
+                "options": {
+                    "num_workers": 10
+                }
+            },
+            "logging": {
+                "enabled": True,
+                "level": settings['logging']['log_level'],
+                "log_file": os.path.join(settings['logging']['log_dir'], "nornir.log"),
+                "format": settings['logging']['log_format']
+            }
         }
+        
+        # 写入配置文件
+        with open(config_yaml_path, "w") as f:
+            yaml.dump(config_content, f, default_flow_style=False)
 
-        for file_type, file_path in required_files.items():
+        # 验证配置文件是否存在
+        required_files = ["hosts.yaml", "groups.yaml", "defaults.yaml"]
+        missing_files = []
+        for filename in required_files:
+            file_path = os.path.join(config_dir, filename)
             if not os.path.exists(file_path):
-                logger.error(f"文件不存在: {file_path}")
-                raise HTTPException(
-                    status_code=404,
-                    detail=f"找不到{file_type}文件: {file_path}"
-                )
-
-        # 获取第一个设备的详细信息
-        try:
-            first_device = devices[0]
-            device_info = ConfigLoader.get_device_info(first_device['ip'], device_type)
-            logger.info(f"已获取设备信息: {first_device['ip']}")
-
-        except Exception as e:
-            logger.error(f"获取设备信息失败: {str(e)}")
-            raise HTTPException(
-                status_code=500,
-                detail=f"获取设备信息失败: {str(e)}"
-            )
-
-        # 准备检查配置
-        config = {
-            "commands_file": request.commandJson,
-            "prompt_file": request.promptTxt
-        }
-
-        try:
-            # 创建检查器实例
-            inspector = GenericInspector(device_info, config)
-            logger.info("检查器初始化成功")
-
-            # 执行检查
-            raw_config_path, report_path = inspector.run()
-            logger.info("检查完成")
-            logger.info(f"原始配置保存路径: {raw_config_path}")
-            logger.info(f"报告保存路径: {report_path}")
-
-            # 获取最新日志
-            log_file = os.path.join(BASE_DIR, "logs", f"generic_inspector_{datetime.now().strftime('%Y%m%d')}.log")
-            recent_logs = []
-            if os.path.exists(log_file):
-                with open(log_file, "r", encoding='utf-8') as f:
-                    # 获取最后20行有意义的日志（非空行）
-                    logs = f.readlines()
-                    recent_logs = [log.strip() for log in logs[-30:] if log.strip()][-20:]
-
-            # 返回结果
+                missing_files.append(filename)
+                logger.warning(f"Missing file: {file_path}")
+            else:
+                logger.info(f"Found file: {file_path}")
+        
+        if missing_files:
             return JSONResponse(
                 content={
-                    "status": "success",
-                    "message": "设备检查完成",
-                    "deviceInfo": {
-                        "type": device_type,
-                        "ip": first_device['ip']
-                    },
-                    "paths": {
-                        "rawConfig": raw_config_path,
-                        "report": report_path
-                    },
-                    "logs": recent_logs
-                },
-                status_code=200
+                    "success": False,
+                    "error": f"Missing required files: {', '.join(missing_files)}"
+                }
             )
 
+        # 尝试初始化 Nornir
+        try:
+            # 切换到项目根目录
+            os.chdir(project_root)
+            nr = InitNornir(config_file="config/config.yaml")
+            hosts = nr.inventory.hosts
+            logger.info(f"Nornir initialization successful, found {len(hosts)} hosts")
+            return JSONResponse(
+                content={
+                    "success": True,
+                    "message": f"Configuration valid. Found {len(hosts)} devices."
+                }
+            )
         except Exception as e:
-            logger.error(f"设备检查过程失败: {str(e)}", exc_info=True)
-            raise HTTPException(
-                status_code=500,
-                detail=f"设备检查失败: {str(e)}"
+            logger.error(f"Nornir initialization error: {str(e)}")
+            return JSONResponse(
+                content={
+                    "success": False,
+                    "error": f"Invalid configuration: {str(e)}"
+                }
             )
 
-    except HTTPException as he:
-        raise he
     except Exception as e:
-        logger.error(f"未预期的错误: {str(e)}", exc_info=True)
-        raise HTTPException(
-            status_code=500,
-            detail=f"未预期的错误: {str(e)}"
+        logger.error(f"Validation error: {str(e)}")
+        return JSONResponse(
+            content={
+                "success": False,
+                "error": f"Validation failed: {str(e)}"
+            }
         )
+
+@app.post("/api/inspection/start")
+async def start_inspection(request: dict):
+    """Start inspection for selected hosts"""
+    try:
+        selected_hosts = request.get("hosts", [])
+        command_file = request.get("commandFile")
+        prompt_file = request.get("promptFile")
+
+        logger.info(f"Starting inspection with hosts: {selected_hosts}")
+        logger.info(f"Command file: {command_file}")
+        logger.info(f"Prompt file: {prompt_file}")
+
+        if not selected_hosts:
+            raise HTTPException(status_code=400, detail="No hosts selected")
+        
+        if not command_file or not prompt_file:
+            raise HTTPException(status_code=400, detail="Command file and prompt file must be selected")
+
+        # 确保工作目录正确
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        os.chdir(project_root)
+
+        # 确保配置目录存在
+        settings = load_settings()
+        os.makedirs(os.path.join(project_root, settings['directories']['raw_configs']), exist_ok=True)
+        os.makedirs(os.path.join(project_root, settings['directories']['reports']), exist_ok=True)
+
+        # Initialize Nornir with relative paths
+        nr = InitNornir(config_file="config/config.yaml")
+
+        # Filter selected hosts
+        target_hosts = nr.filter(filter_func=lambda h: h.name in selected_hosts)
+        
+        if not target_hosts.inventory.hosts:
+            raise HTTPException(status_code=404, detail="No matching hosts found")
+
+        # Start inspection for each host
+        results = []
+        for host_name, host in target_hosts.inventory.hosts.items():
+            try:
+                device_info = {
+                    "host": host_name,
+                    "device_type": host.platform
+                }
+                
+                config = {
+                    "commands_file": command_file,
+                    "prompt_file": prompt_file
+                }
+
+                logger.info(f"Starting inspection for host {host_name}")
+                logger.info(f"Device info: {device_info}")
+                logger.info(f"Config: {config}")
+
+                inspector = GenericInspector(device_info, config)
+                raw_config_path, report_path = inspector.run()
+                
+                results.append({
+                    "host": host_name,
+                    "status": "success",
+                    "raw_config": raw_config_path,
+                    "report": report_path
+                })
+                logger.info(f"Inspection completed for host {host_name}")
+
+            except Exception as e:
+                logger.error(f"Inspection failed for host {host_name}: {str(e)}")
+                results.append({
+                    "host": host_name,
+                    "status": "failed",
+                    "error": str(e)
+                })
+
+        return JSONResponse(
+            content={
+                "status": "success",
+                "message": f"Inspection completed for {len(results)} hosts",
+                "results": results
+            }
+        )
+    except Exception as e:
+        logger.error(f"Inspection error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 # AI operation endpoint
 @app.post("/api/ai_operation/execute")
 def execute_ai_command(payload: AICommandRequest):
@@ -270,37 +356,172 @@ def execute_ai_command(payload: AICommandRequest):
 # New endpoint to list files in directories
 @app.get("/api/files/list")
 async def list_files(directory: str):
-    """
-    List files in the specified directory.
-
-    Args:
-        directory: Directory name (e.g., 'config', 'templates/commands', 'templates/prompts')
-
-    Returns:
-        List of file names with paths
-    """
+    """List files in the specified directory"""
     try:
-        base_path = os.path.join(BASE_DIR, directory)
-        logger.info(f"Attempting to list files in directory: {base_path}")
-        if not os.path.exists(base_path):
-            raise HTTPException(status_code=404, detail=f"Directory {directory} not found")
-
+        # 使用项目根目录作为基准
+        abs_directory = os.path.join(project_root, directory)
+        logger.info(f"Scanning directory: {abs_directory}")
+        
+        # 确保目录存在
+        os.makedirs(abs_directory, exist_ok=True)
+        
         files = []
-        for filename in os.listdir(base_path):
-            full_path = os.path.join(directory, filename).replace("\\", "/")  # 替换为Unix风格路径
-            if os.path.isfile(os.path.join(base_path, filename)):
+        for filename in os.listdir(abs_directory):
+            abs_path = os.path.join(abs_directory, filename)
+            if os.path.isfile(abs_path):
+                # 返回相对路径
+                rel_path = os.path.join(directory, filename).replace("\\", "/")
                 files.append({
                     "name": filename,
-                    "path": full_path
+                    "path": rel_path
                 })
-        logger.info(f"Found files: {files}")
+                logger.info(f"Found file: {filename} at {rel_path}")
+        
+        logger.info(f"Total files found: {len(files)}")
         return JSONResponse(
             content={"files": files},
-            headers={"Cache-Control": "no-cache, no-store, must-revalidate"}  # 禁用缓存
+            headers={"Cache-Control": "no-cache"}
         )
     except Exception as e:
         logger.error(f"Error listing files: {str(e)}", exc_info=True)
-        raise HTTPException(status_code=500, detail=str(e))
+        return JSONResponse(
+            content={"files": []},
+            headers={"Cache-Control": "no-cache"}
+        )
+
+@app.get("/api/hosts/list")
+async def list_hosts():
+    """Get list of available hosts from Nornir inventory"""
+    try:
+        config_yaml = "config/config.yaml"
+        
+        if not os.path.exists(config_yaml):
+            return JSONResponse(
+                content={
+                    "hosts": [],
+                    "message": "Configuration file not found"
+                },
+                headers={"Cache-Control": "no-cache"}
+            )
+
+        nr = InitNornir(config_file=config_yaml)
+        
+        hosts_list = []
+        for name, host in nr.inventory.hosts.items():
+            groups = []
+            try:
+                groups = [group.name for group in host.groups]
+            except Exception as e:
+                logger.warning(f"Failed to get groups for host {name}: {str(e)}")
+
+            host_info = {
+                "name": name,
+                "ip": host.hostname,
+                "platform": getattr(host, 'platform', 'unknown'),
+                "groups": groups
+            }
+            hosts_list.append(host_info)
+        
+        return JSONResponse(
+            content={"hosts": hosts_list},
+            headers={"Cache-Control": "no-cache"}
+        )
+    except Exception as e:
+        logger.error(f"Error listing hosts: {str(e)}", exc_info=True)
+        return JSONResponse(
+            status_code=500,
+            content={
+                "error": f"Failed to fetch hosts list: {str(e)}",
+                "hosts": []
+            }
+        )
+
+# Add settings model
+class Settings(BaseModel):
+    connection: dict
+    logging: dict
+    langchain: dict
+    ai_config: dict
+    directories: dict
+
+# Add these new endpoints
+@app.get("/api/settings")
+async def get_settings():
+    """Get current settings from settings.yaml"""
+    try:
+        settings = load_settings()
+        return JSONResponse(
+            content=settings,
+            headers={"Cache-Control": "no-cache"}
+        )
+    except Exception as e:
+        logger.error(f"Error loading settings: {str(e)}")
+        return JSONResponse(
+            status_code=500,
+            content={"error": f"Failed to load settings: {str(e)}"}
+        )
+
+@app.post("/api/settings")
+async def save_settings(settings: dict):
+    """Save settings to settings.yaml"""
+    try:
+        settings_file = os.path.join(project_root, "utils", "settings.yaml")
+        
+        # 确保目录存在
+        os.makedirs(os.path.dirname(settings_file), exist_ok=True)
+        
+        # 保存设置
+        with open(settings_file, 'w', encoding='utf-8') as f:
+            yaml.dump(settings, f, default_flow_style=False, allow_unicode=True)
+        
+        return JSONResponse(
+            content={"message": "Settings saved successfully"},
+            headers={"Cache-Control": "no-cache"}
+        )
+    except Exception as e:
+        logger.error(f"Error saving settings: {str(e)}")
+        return JSONResponse(
+            status_code=500,
+            content={"error": f"Failed to save settings: {str(e)}"}
+        )
+
+# 修改 ensure_directories 函数
+def ensure_directories():
+    """Ensure all required directories exist"""
+    try:
+        settings = load_settings()
+        
+        # 创建日志目录 - 直接从 logging 中获取
+        log_dir = os.path.join(project_root, settings['logging']['log_dir'])
+        os.makedirs(log_dir, exist_ok=True)
+        
+        # 创建输出目录
+        if 'directories' in settings:
+            for dir_path in settings['directories'].values():
+                full_path = os.path.join(project_root, dir_path)
+                os.makedirs(full_path, exist_ok=True)
+                logger.info(f"Created directory: {full_path}")
+            
+        # 创建配置目录
+        config_dir = os.path.join(project_root, "config")
+        os.makedirs(config_dir, exist_ok=True)
+        
+        logger.info("All required directories created successfully")
+        
+    except Exception as e:
+        logger.error(f"Error creating directories: {str(e)}")
+        raise
+
+# 在应用启动时确保目录存在
+@app.on_event("startup")
+async def startup_event():
+    """Initialize application"""
+    try:
+        ensure_directories()
+        logger.info("Application initialized successfully")
+    except Exception as e:
+        logger.error(f"Application initialization failed: {str(e)}")
+        raise
 
 if __name__ == "__main__":
     import uvicorn
