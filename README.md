@@ -24,11 +24,26 @@ NetInspector is an intelligent network automation tool designed for network devi
 - 📝 Automated report generation
 - 🔄 Real-time monitoring and alerts
 - 🔍 Deep security inspection
+- 🌐 Web-based management interface
+
+### Technology Stack
+#### Backend
+- Python 3.12
+- FastAPI
+- Nornir (Network Automation Framework)
+- OpenAI API Integration
+- SQLite Database
+
+#### Frontend
+- React 18
+- Ant Design 5.0
+- Axios
+- Vite
 
 ### Installation
 1. Clone the repository
 ```bash
-git clone <repository_url>
+git clone https://github.com/beautiful1112/NetInspector.git
 cd NetInspector
 ```
 
@@ -42,42 +57,46 @@ python -m venv .venv
 python -m venv .venv
 source .venv/bin/activate
 ```
-3. Install dependencies
+
+3. Install backend dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### Quick Start
-1. Set up your device information
-```python
-# config.yaml
-devices:
-  - name: "USG-1"
-    host: "192.168.1.1"
-    type: "huawei_usg"
+4. Install frontend dependencies
+```bash
+cd frontend/netinspector-frontend
+npm install
 ```
 
-2. Run the inspection script
+5. Configure settings
+- Copy `utils/settings.yaml.example` to `utils/settings.yaml`
+- Update AI API configuration and other necessary settings
+
+6. Start services
 ```bash
-python inspection/generic_inspector.py
+# Start backend service
+python -m uvicorn api.main:app --reload
+
+# Start frontend service (new terminal)
+cd frontend/netinspector-frontend
+npm run dev
 ```
 
 ### Project Structure
 ```
 NetInspector/
-├── connect/                 # Connection handling
-│   └── device_connector.py
-├── inspection/             # Inspection modules
-│   └──generic_inspector.py
-├── output/                 # Output directory
-│   ├── raw_configs/       # Raw configuration files
-│   └── reports/           # Analysis reports
-├── utils/                  # Utility functions
-│   ├── config_loader.py
-│   ├── logger.py
-│   └── settings.py
-├── requirements.txt        # Project dependencies
-└── README.md              # Project documentation
+├── api/                # API implementation
+├── config/             # Configuration files
+├── frontend/          # Frontend code
+│   └── netinspector-frontend/
+├── inspection/        # Inspection logic
+├── operation/        # Operation related code
+├── templates/        # Template files
+│   ├── commands/    # Command templates
+│   └── prompts/     # AI prompts
+├── utils/            # Utility functions
+└── README.md
 ```
 
 ### Configuration
@@ -96,6 +115,7 @@ NetInspector/
 - Python 3.8+
 - Required packages listed in requirements.txt
 - Network device access credentials
+- Node.js 16+ (for frontend)
 
 ### Contributing
 We welcome contributions! Please follow these steps:
@@ -131,13 +151,29 @@ NetInspector（网眼）是一个集成AI技术的智能网络自动化工具，
 - 📝 自动化报告生成
 - 🔄 实时监控和告警
 - 🔍 深度安全检查
+- 🌐 Web管理界面
+
+### 技术栈
+#### 后端
+- Python 3.12
+- FastAPI
+- Nornir (网络自动化框架)
+- OpenAI API 集成
+- SQLite 数据库
+
+#### 前端
+- React 18
+- Ant Design 5.0
+- Axios
+- Vite
 
 ### 安装方法
 1. 克隆仓库
 ```bash
-git clone <repository_url>
+git clone https://github.com/beautiful1112/NetInspector.git
 cd NetInspector
 ```
+
 2. 配置环境
 ```bash
 # Windows
@@ -148,42 +184,46 @@ python -m venv .venv
 python -m venv .venv
 source .venv/bin/activate
 ```
-3. 安装依赖
+
+3. 安装后端依赖
 ```bash
 pip install -r requirements.txt
 ```
 
-### 快速开始
-1. 设置设备信息
-```python
-# config.yaml
-devices:
-  - name: "USG-1"
-    host: "192.168.1.1"
-    type: "huawei_usg"
+4. 安装前端依赖
+```bash
+cd frontend/netinspector-frontend
+npm install
 ```
 
-2. 运行巡检脚本
+5. 配置设置
+- 复制 `utils/settings.yaml.example` 到 `utils/settings.yaml`
+- 更新 AI API 配置和其他必要设置
+
+6. 启动服务
 ```bash
-python inspection/generic_inspector.py
+# 启动后端服务
+python -m uvicorn api.main:app --reload
+
+# 启动前端服务（新终端）
+cd frontend/netinspector-frontend
+npm run dev
 ```
 
 ### 项目结构
 ```
 NetInspector/
-├── connect/                 # 连接处理
-│   └── device_connector.py
-├── inspection/             # 巡检模块
-│   └── generic_inspector.py
-├── output/                 # 输出目录
-│   ├── raw_configs/       # 原始配置文件
-│   └── reports/           # 分析报告
-├── utils/                  # 工具函数
-│   ├── config_loader.py
-│   ├── logger.py
-│   └── settings.py
-├── requirements.txt        # 项目依赖
-└── README.md              # 项目文档
+├── api/                # API实现
+├── config/             # 配置文件目录
+├── frontend/          # 前端代码
+│   └── netinspector-frontend/
+├── inspection/        # 巡检逻辑
+├── operation/        # 操作相关代码
+├── templates/        # 模板文件
+│   ├── commands/    # 命令模板
+│   └── prompts/     # AI提示模板
+├── utils/            # 工具函数
+└── README.md
 ```
 
 ### 配置说明
@@ -192,7 +232,6 @@ NetInspector/
 - 在templates文件夹中的`prompt.yaml`中自定义提示提示词
 - 在utils文件夹中的`settings.py`中自定义日志和API密钥设置
 - 在config文件夹中的`config.yaml`中自定义设备信息
-
 
 ### 输出文件
 - 设备原始配置：`output/raw_configs/`
@@ -203,6 +242,7 @@ NetInspector/
 - Python 3.8+
 - requirements.txt 中列出的必需包
 - 网络设备访问凭证
+- Node.js 16+ (前端开发)
 
 ### 贡献指南
 我们欢迎贡献！请遵循以下步骤：
