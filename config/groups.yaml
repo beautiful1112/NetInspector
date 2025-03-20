@@ -20,6 +20,10 @@ switches:
         auth_timeout: 10
     napalm:
       platform: ios
+      extras:
+        optional_args:
+          transport: ssh
+          timeout: 60
 
 wireless:
   platform: aruba
@@ -87,4 +91,9 @@ cisco_ios:
     netmiko:
       platform: cisco_ios
       extras:
-        secret: your_enable_secret 
+        secret: cisco
+    napalm:
+      platform: ios
+      extras:
+        optional_args:
+          secret: cisco 

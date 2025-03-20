@@ -46,14 +46,27 @@ const Home = () => {
         setShowConfirm(true);
       }
 
+      // 添加AI回复到消息列表
       setMessages(prev => [...prev, {
         role: 'assistant',
         content: response.data.response
       }]);
 
+      // 更新终端输出
+      if (response.data.terminal_output) {
+        setTerminalContent(prev => [...prev, ...response.data.terminal_output]);
+      }
+
     } catch (error) {
       message.error('Failed to send message');
       console.error('Chat error:', error);
+      
+      // 在终端显示错误信息
+      if (error.response?.data?.terminal_output) {
+        setTerminalContent(prev => [...prev, ...error.response.data.terminal_output]);
+      } else {
+        setTerminalContent(prev => [...prev, '> Error: Failed to process command']);
+      }
     } finally {
       setLoading(false);
     }

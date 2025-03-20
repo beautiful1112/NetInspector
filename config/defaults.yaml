@@ -1,6 +1,12 @@
 ---
 username: admin
 password: Admin@1234
+connection_options:
+  napalm:
+    extras:
+      optional_args: {}
+  netmiko:
+    extras: {}
 
 
 logging:

@@ -10,7 +10,7 @@ firewall01:
 switch01:
   hostname: 172.18.10.200
   groups:
-    - cisco
+    - switches
   data:
     vendor: cisco
     model: catalyst-9300
@@ -27,4 +27,14 @@ router1:
   hostname: 192.168.1.1
   platform: ios
   groups:
-    - cisco_ios 
+    - cisco_ios
+  data:
+    role: core_router
+
+router2:
+  hostname: 192.168.1.2
+  platform: ios
+  groups:
+    - cisco_ios
+  data:
+    role: distribution_router 

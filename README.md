@@ -15,6 +15,38 @@ NetInspector 是一个智能网络自动化工具，集成了AI技术，用于�
 ### Description
 NetInspector is an intelligent network automation tool designed for network device inspection and configuration management. Powered by AI technology, it currently supports Huawei USG firewalls and can be extended to support other network devices. The tool helps network administrators improve efficiency and network security through automated inspection, policy analysis, and intelligent reporting.
 
+### AI Operations
+NetInspector now includes an AI-powered network operations assistant that helps network administrators manage and monitor their network devices through natural language interactions.
+
+#### AI Assistant Features
+- 🤖 Natural Language Interface
+  - Communicate with network devices using everyday language
+  - Execute commands through natural language processing
+
+- 🔍 Device Information Retrieval
+  - List all available network devices
+  - Get detailed interface information
+  - Get IP address configurations
+
+- 📊 Network Analysis
+  - Analyze device configurations
+  - Monitor interface status
+  - Check connectivity issues
+
+- 🛠️ Automated Operations
+  - Execute network commands through natural language
+  - Batch configuration management
+  - Configuration validation
+
+#### Example Usage
+```bash
+# Natural language commands examples
+
+"List all available network devices"
+"Show me the IP addresses of switch01's interfaces"
+"Get detailed information about switch01's interfaces"
+```
+
 ### Key Features
 - 🤖 Automated device inspection
 - 💾 Configuration backup and management
@@ -141,6 +173,38 @@ For support and questions:
 
 ### 描述
 NetInspector（网眼）是一个集成AI技术的智能网络自动化工具，专注于网络设备巡检和配置管理。目前支持华为USG防火墙，并可扩展支持其他网络设备。该工具通过自动化巡检、策略分析和智能报告功能，帮助网络管理员提升工作效率和网络安全性。
+
+### AI 运维
+NetInspector现已包含AI驱动的网络运维助手，通过自然语言交互帮助网络管理员管理和监控网络设备。
+
+#### AI助手功能
+- 🤖 自然语言交互
+  - 使用日常语言与网络设备进行交互
+  - 通过自然语言处理执行命令
+
+- 🔍 设备信息获取
+  - 列出所有可用的网络设备
+  - 获取详细的接口信息
+  - 获取IP地址配置
+
+- 📊 网络分析
+  - 分析设备配置
+  - 监控接口状态
+  - 检查连接问题
+
+- 🛠️ 自动化操作
+  - 通过自然语言执行网络命令
+  - 批量配置管理
+  - 配置验证
+
+#### 使用示例
+```bash
+# 自然语言命令示例
+
+"列出所有可用的网络设备"
+"显示switch01的所有接口IP地址"
+"获取switch01的接口详细信息"
+```
 
 ### 核心功能
 - 🤖 自动化设备巡检

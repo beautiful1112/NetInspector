@@ -19,6 +19,8 @@ from nornir import InitNornir
 import yaml
 from typing import Dict, List
 from datetime import datetime
+from api.network_routes import router as network_router
+from operation.ai_operator import AIOperator
 
 logger = get_logger(__name__)
 
@@ -37,6 +39,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include network routes
+app.include_router(network_router, prefix="/api/network", tags=["network"])
 
 class AICommandRequest(BaseModel):
     command: str
@@ -347,13 +352,17 @@ async def start_inspection(request: dict):
         logger.error(f"Inspection error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
+# Initialize AI operator
+ai_operator = AIOperator()
+
 # AI operation endpoint
 @app.post("/api/ai_operation/execute")
 def execute_ai_command(payload: AICommandRequest):
     try:
-        result = run_ai_operation(payload.command)
-        return result
+        result = ai_operator.process_command(payload.command)
+        return {"response": result}
     except Exception as e:
+        logger.error(f"AI operation error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
 # New endpoint to list files in directories
@@ -525,6 +534,47 @@ async def startup_event():
     except Exception as e:
         logger.error(f"Application initialization failed: {str(e)}")
         raise
+
+class ChatRequest(BaseModel):
+    message: str
+
+@app.post("/api/chat")
+async def chat(request: ChatRequest):
+    """Handle chat messages"""
+    try:
+        # Get AI response and tool outputs
+        result = ai_operator.process_command(request.message)
+        
+        # Create terminal output
+        terminal_output = [
+            f"> User Command: {request.message}",
+            f"> AI Processing...",
+        ]
+        
+        # Add tool outputs if available
+        if result.get("tool_outputs"):
+            terminal_output.extend(result["tool_outputs"])
+            
+        # Add final response
+        terminal_output.append(f"> AI Response: {result['response']}")
+        
+        return {
+            "response": result["response"],
+            "terminal_output": terminal_output
+        }
+    except Exception as e:
+        logger.error(f"Chat error: {str(e)}")
+        error_output = [
+            f"> Error occurred while processing command:",
+            f"> {str(e)}"
+        ]
+        return JSONResponse(
+            status_code=500,
+            content={
+                "error": str(e),
+                "terminal_output": error_output
+            }
+        )
 
 if __name__ == "__main__":
     import uvicorn
