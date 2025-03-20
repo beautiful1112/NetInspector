@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Card, Select, Button, message, Space, Collapse, Typography, Row, Col, Table, Checkbox, Upload } from 'antd';
+import { Card, Select, Button, message, Space, Collapse, Typography, Row, Col, Table, Checkbox, Upload, InputNumber } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import axios from '@/utils/axios';
 import './styles.css';
@@ -20,6 +20,7 @@ const InspectorDetail = () => {
   const [logs, setLogs] = useState([]);
   const terminalRef = useRef(null);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [chunkSize, setChunkSize] = useState(75000);
 
   // 定义表格列
   const columns = [
@@ -117,12 +118,14 @@ const InspectorDetail = () => {
     addLog(`Selected hosts: ${selectedRowKeys.join(', ')}`, 'info');
     addLog(`Command file: ${selectedCommand}`, 'info');
     addLog(`Prompt file: ${selectedPrompt}`, 'info');
+    addLog(`Analysis chunk size: ${chunkSize}`, 'info');
 
     try {
       const response = await axios.post('/api/inspection/start', {
         hosts: selectedRowKeys,
         commandFile: selectedCommand,
-        promptFile: selectedPrompt
+        promptFile: selectedPrompt,
+        chunkSize: chunkSize
       });
 
       if (response.data.status === 'success') {
@@ -250,6 +253,24 @@ const InspectorDetail = () => {
                         </Button>
                       </Upload>
                     </Space>
+                  </Space>
+                </div>
+
+                <div className="select-item">
+                  <Space direction="vertical" style={{ width: '100%' }}>
+                    <Text strong>Analysis Chunk Size:</Text>
+                    <InputNumber
+                      style={{ width: '300px' }}
+                      min={1000}
+                      max={150000}
+                      value={chunkSize}
+                      onChange={setChunkSize}
+                      formatter={value => `${value} characters`}
+                      parser={value => value.replace(' characters', '')}
+                    />
+                    <Text type="secondary">
+                      Set the maximum size of text chunks for AI analysis (1,000 - 150,000 characters)
+                    </Text>
                   </Space>
                 </div>
 

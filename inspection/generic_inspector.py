@@ -26,11 +26,14 @@ class GenericInspector:
         self.logger = get_logger('generic_inspector')
         self.config = config
         self.project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        # Set default chunk size for AI analysis
+        self.chunk_size = config.get('chunk_size', 75000)
 
         # 记录初始化信息
         self.logger.info(f"Initializing inspector for device: {device_info}")
         self.logger.info(f"Config: {config}")
         self.logger.info(f"Project root: {self.project_root}")
+        self.logger.info(f"Analysis chunk size: {self.chunk_size}")
 
         # 加载设置
         try:
@@ -221,7 +224,7 @@ class GenericInspector:
             self.logger.error(f"Configuration data formatting failed: {str(e)}")
             raise
 
-    def _split_config_into_chunks(self, config: str, max_chunk_size: int = 75000) -> List[str]:
+    def _split_config_into_chunks(self, config: str) -> List[str]:
         """Split configuration data into smaller chunks for AI analysis"""
         lines = config.splitlines(keepends=True)
         chunks = []
@@ -229,16 +232,16 @@ class GenericInspector:
 
         for line in lines:
             # Handle long lines
-            if len(line) >= max_chunk_size:
+            if len(line) >= self.chunk_size:
                 if current_chunk:
                     chunks.append(current_chunk)
                     current_chunk = ""
-                for i in range(0, len(line), max_chunk_size):
-                    chunks.append(line[i:i + max_chunk_size])
+                for i in range(0, len(line), self.chunk_size):
+                    chunks.append(line[i:i + self.chunk_size])
                 continue
 
             # Normal line processing
-            if len(current_chunk) + len(line) > max_chunk_size:
+            if len(current_chunk) + len(line) > self.chunk_size:
                 chunks.append(current_chunk)
                 current_chunk = line
             else:
@@ -250,8 +253,8 @@ class GenericInspector:
         # Merge small chunks
         merged_chunks = []
         for chunk in chunks:
-            if merged_chunks and len(chunk) < max_chunk_size * 0.2 and \
-                    len(merged_chunks[-1]) + len(chunk) <= max_chunk_size:
+            if merged_chunks and len(chunk) < self.chunk_size * 0.2 and \
+                    len(merged_chunks[-1]) + len(chunk) <= self.chunk_size:
                 merged_chunks[-1] += chunk
             else:
                 merged_chunks.append(chunk)

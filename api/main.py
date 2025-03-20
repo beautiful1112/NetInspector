@@ -267,10 +267,12 @@ async def start_inspection(request: dict):
         selected_hosts = request.get("hosts", [])
         command_file = request.get("commandFile")
         prompt_file = request.get("promptFile")
+        chunk_size = request.get("chunkSize", 75000)  # Default to 75000 if not provided
 
         logger.info(f"Starting inspection with hosts: {selected_hosts}")
         logger.info(f"Command file: {command_file}")
         logger.info(f"Prompt file: {prompt_file}")
+        logger.info(f"Analysis chunk size: {chunk_size}")
 
         if not selected_hosts:
             raise HTTPException(status_code=400, detail="No hosts selected")
@@ -307,7 +309,8 @@ async def start_inspection(request: dict):
                 
                 config = {
                     "commands_file": command_file,
-                    "prompt_file": prompt_file
+                    "prompt_file": prompt_file,
+                    "chunk_size": chunk_size  # Pass chunk_size to inspector
                 }
 
                 logger.info(f"Starting inspection for host {host_name}")
