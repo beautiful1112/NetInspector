@@ -27,6 +27,7 @@ const Settings = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
+  const [initialValues, setInitialValues] = useState(null);
 
   const loadSettings = async () => {
     setLoading(true);
@@ -35,7 +36,11 @@ const Settings = () => {
       const response = await axios.get('/api/settings');
       console.log('Loaded settings:', response.data);
       if (response.data) {
-        form.setFieldsValue(response.data);
+        setInitialValues(response.data);
+        // 只在首次加载或手动刷新时设置表单值
+        if (!form.getFieldsValue()?.connection) {
+          form.setFieldsValue(response.data);
+        }
       }
     } catch (err) {
       console.error('Settings loading error:', err);
@@ -55,7 +60,8 @@ const Settings = () => {
     try {
       await axios.post('/api/settings', values);
       message.success('Settings saved successfully');
-      await loadSettings();
+      // 更新初始值，但不重置表单
+      setInitialValues(values);
     } catch (err) {
       message.error('Failed to save settings');
     } finally {
@@ -63,7 +69,13 @@ const Settings = () => {
     }
   };
 
-  if (loading) {
+  const handleReset = () => {
+    if (initialValues) {
+      form.setFieldsValue(initialValues);
+    }
+  };
+
+  if (loading && !initialValues) {
     return (
       <div className="settings-loading">
         <Spin size="large" />
@@ -101,6 +113,7 @@ const Settings = () => {
           form={form}
           layout="vertical"
           onFinish={onFinish}
+          initialValues={initialValues}
         >
           <Tabs defaultActiveKey="connection">
             <TabPane tab="Connection" key="connection">
@@ -225,7 +238,7 @@ const Settings = () => {
                 <Input disabled />
               </Form.Item>
               <Text type="secondary">
-                Directory settings are read-only and can only be modified in settings.py
+                Directory settings are read-only and can only be modified in settings.yaml
               </Text>
             </TabPane>
           </Tabs>
@@ -240,10 +253,7 @@ const Settings = () => {
               >
                 Save Settings
               </Button>
-              <Button onClick={() => {
-                form.resetFields();
-                loadSettings();
-              }}>
+              <Button onClick={handleReset}>
                 Reset
               </Button>
             </Space>

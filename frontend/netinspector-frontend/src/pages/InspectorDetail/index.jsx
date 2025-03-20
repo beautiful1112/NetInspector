@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Card, Select, Button, message, Space, Collapse, Typography, Row, Col, Table, Checkbox } from 'antd';
+import { Card, Select, Button, message, Space, Collapse, Typography, Row, Col, Table, Checkbox, Upload } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 import axios from '@/utils/axios';
 import './styles.css';
 
@@ -15,6 +16,7 @@ const InspectorDetail = () => {
   const [selectedCommand, setSelectedCommand] = useState('');
   const [selectedPrompt, setSelectedPrompt] = useState('');
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [logs, setLogs] = useState([]);
   const terminalRef = useRef(null);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -145,6 +147,45 @@ const InspectorDetail = () => {
     }
   };
 
+  const handleUpload = async (file, type) => {
+    setUploading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const endpoint = type === 'command' ? '/api/upload/commands' : '/api/upload/prompt';
+      const response = await axios.post(endpoint, formData);
+      if (response.data.message) {
+        message.success(`${file.name} uploaded successfully`);
+        await fetchTemplateFiles();
+        return true;
+      }
+    } catch (error) {
+      message.error(`${file.name} upload failed`);
+    } finally {
+      setUploading(false);
+    }
+    return false;
+  };
+
+  // 文件上传配置
+  const uploadProps = (type) => ({
+    showUploadList: false,
+    beforeUpload: (file) => {
+      const isValidType = type === 'command' 
+        ? file.name.endsWith('.json')
+        : file.name.endsWith('.txt');
+      
+      if (!isValidType) {
+        message.error(`${type === 'command' ? 'Command templates must be JSON files' : 'Prompt templates must be TXT files'}`);
+        return false;
+      }
+      
+      handleUpload(file, type);
+      return false;
+    },
+  });
+
   return (
     <div className="inspector-container">
       <Card title="Network Device Inspector" className="main-card">
@@ -163,35 +204,53 @@ const InspectorDetail = () => {
                 />
 
                 <div className="select-item">
-                  <Text strong>Command Template:</Text>
-                  <Select
-                    style={{ width: '100%' }}
-                    placeholder="Select command template"
-                    value={selectedCommand}
-                    onChange={setSelectedCommand}
-                  >
-                    {commandFiles.map(file => (
-                      <Option key={file.path} value={file.path}>
-                        {file.name}
-                      </Option>
-                    ))}
-                  </Select>
+                  <Space direction="vertical" style={{ width: '100%' }}>
+                    <Text strong>Command Template:</Text>
+                    <Space>
+                      <Select
+                        style={{ width: '300px' }}
+                        placeholder="Select command template"
+                        value={selectedCommand}
+                        onChange={setSelectedCommand}
+                      >
+                        {commandFiles.map(file => (
+                          <Option key={file.path} value={file.path}>
+                            {file.name}
+                          </Option>
+                        ))}
+                      </Select>
+                      <Upload {...uploadProps('command')}>
+                        <Button icon={<UploadOutlined />} loading={uploading}>
+                          Upload Command
+                        </Button>
+                      </Upload>
+                    </Space>
+                  </Space>
                 </div>
 
                 <div className="select-item">
-                  <Text strong>Prompt Template:</Text>
-                  <Select
-                    style={{ width: '100%' }}
-                    placeholder="Select prompt template"
-                    value={selectedPrompt}
-                    onChange={setSelectedPrompt}
-                  >
-                    {promptFiles.map(file => (
-                      <Option key={file.path} value={file.path}>
-                        {file.name}
-                      </Option>
-                    ))}
-                  </Select>
+                  <Space direction="vertical" style={{ width: '100%' }}>
+                    <Text strong>Prompt Template:</Text>
+                    <Space>
+                      <Select
+                        style={{ width: '300px' }}
+                        placeholder="Select prompt template"
+                        value={selectedPrompt}
+                        onChange={setSelectedPrompt}
+                      >
+                        {promptFiles.map(file => (
+                          <Option key={file.path} value={file.path}>
+                            {file.name}
+                          </Option>
+                        ))}
+                      </Select>
+                      <Upload {...uploadProps('prompt')}>
+                        <Button icon={<UploadOutlined />} loading={uploading}>
+                          Upload Prompt
+                        </Button>
+                      </Upload>
+                    </Space>
+                  </Space>
                 </div>
 
                 <Button 
