@@ -47,6 +47,40 @@ NetInspector now includes an AI-powered network operations assistant that helps 
 "Get detailed information about switch01's interfaces"
 ```
 
+### REST API Documentation
+NetInspector provides a comprehensive REST API for programmatic access to network device information and management.
+
+#### Available Endpoints
+- `GET /hosts`
+  - List all available network devices
+  - Returns a list of device hostnames and their basic information
+
+- `POST /interfaces/ip`
+  - Get IP addresses for all interfaces on specified devices
+  - Request body: JSON array of hostnames
+  - Returns IPv4 and IPv6 addresses for each interface
+
+- `POST /interfaces`
+  - Get detailed interface information for specified devices
+  - Request body: JSON array of hostnames
+  - Returns comprehensive interface details including status, MTU, speed, etc.
+
+#### API Usage Examples
+```bash
+# List all hosts
+curl -X GET http://localhost:8000/hosts
+
+# Get interface IPs for specific devices
+curl -X POST http://localhost:8000/interfaces/ip \
+  -H "Content-Type: application/json" \
+  -d '["switch01"]'
+
+# Get detailed interface information
+curl -X POST http://localhost:8000/interfaces \
+  -H "Content-Type: application/json" \
+  -d '["switch01"]'
+```
+
 ### Key Features
 - 🤖 Automated device inspection
 - 💾 Configuration backup and management
@@ -204,6 +238,40 @@ NetInspector现已包含AI驱动的网络运维助手，通过自然语言交互
 "列出所有可用的网络设备"
 "显示switch01的所有接口IP地址"
 "获取switch01的接口详细信息"
+```
+
+### REST API 文档
+NetInspector提供了完整的REST API，用于以编程方式访问和管理网络设备信息。
+
+#### 可用接口
+- `GET /hosts`
+  - 列出所有可用的网络设备
+  - 返回设备主机名和基本信息列表
+
+- `POST /interfaces/ip`
+  - 获取指定设备所有接口的IP地址
+  - 请求体：主机名JSON数组
+  - 返回每个接口的IPv4和IPv6地址
+
+- `POST /interfaces`
+  - 获取指定设备的详细接口信息
+  - 请求体：主机名JSON数组
+  - 返回完整的接口详细信息，包括状态、MTU、速度等
+
+#### API使用示例
+```bash
+# 列出所有主机
+curl -X GET http://localhost:8000/hosts
+
+# 获取特定设备的接口IP
+curl -X POST http://localhost:8000/interfaces/ip \
+  -H "Content-Type: application/json" \
+  -d '["switch01"]'
+
+# 获取详细接口信息
+curl -X POST http://localhost:8000/interfaces \
+  -H "Content-Type: application/json" \
+  -d '["switch01"]'
 ```
 
 ### 核心功能

@@ -1,12 +1,31 @@
 from typing import List, Dict, Any
 from langchain.tools import BaseTool
-from network.nornir_manager import NornirManager
-from network.napalm_operations import get_interfaces_ip, get_interfaces
 from pydantic import Field
 import json
 import logging
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 logger = logging.getLogger(__name__)
+
+class NetworkAPIClient:
+    """Client for handling network API requests with retry mechanism"""
+    def __init__(self):
+        # API base URL configuration
+        self.base_url = "http://localhost:8000"
+        
+        # Configure session with retry mechanism
+        self.session = requests.Session()
+        retry_strategy = Retry(
+            total=3,                  # Number of retries
+            backoff_factor=1,         # Time factor between retries
+            status_forcelist=[500, 502, 503, 504]  # HTTP status codes to retry on
+        )
+        
+        # Apply retry strategy to both HTTP and HTTPS
+        self.session.mount("http://", HTTPAdapter(max_retries=retry_strategy))
+        self.session.mount("https://", HTTPAdapter(max_retries=retry_strategy))
 
 class GetHostsTool(BaseTool):
     name: str = "get_hosts"
@@ -16,27 +35,16 @@ class GetHostsTool(BaseTool):
     Returns a list of all configured hosts with their basic information.
     Example: "list all hosts"
     """
-    nornir_manager: NornirManager = Field(default_factory=NornirManager)
+    api_client: NetworkAPIClient = Field(default_factory=NetworkAPIClient)
     
     def _run(self, query: str) -> str:
         try:
-            # Get all hosts from Nornir inventory
-            hosts_list = []
-            
-            for name, host in self.nornir_manager.nornir.inventory.hosts.items():
-                host_info = {
-                    "name": name,
-                    "hostname": host.hostname,
-                    "platform": getattr(host, 'platform', 'unknown'),
-                    "groups": [str(group) for group in host.groups],
-                    "data": dict(host.data)
-                }
-                hosts_list.append(host_info)
-            
-            return json.dumps(hosts_list, indent=2)
-        except Exception as e:
+            response = self.api_client.session.get(f"{self.api_client.base_url}/hosts")
+            response.raise_for_status()
+            return json.dumps(response.json(), indent=2)
+        except requests.exceptions.RequestException as e:
             logger.error(f"Error in GetHostsTool: {str(e)}")
-            return json.dumps({"error": str(e)})
+            return json.dumps({"error": f"API request failed: {str(e)}"})
 
     async def _arun(self, query: str) -> str:
         raise NotImplementedError("Async version not implemented")
@@ -49,40 +57,28 @@ class GetInterfacesIPTool(BaseTool):
     Example: '["switch01"]'
     Returns IP addresses (both IPv4 and IPv6) for all interfaces on the specified devices.
     """
-    nornir_manager: NornirManager = Field(default_factory=NornirManager)
+    api_client: NetworkAPIClient = Field(default_factory=NetworkAPIClient)
     
     def _run(self, hostnames_json: str) -> str:
         try:
-            # Parse hostnames from JSON string
             hostnames = json.loads(hostnames_json)
             if not isinstance(hostnames, list):
                 raise ValueError("Input must be a JSON array of hostnames")
 
-            # Filter hosts and run the task
-            filtered_nr = self.nornir_manager.filter_hosts(hostnames)
-            result = filtered_nr.run(task=get_interfaces_ip)
-
-            # Format results
-            formatted_results = {}
-            for hostname, host_result in result.items():
-                if host_result.failed:
-                    formatted_results[hostname] = {
-                        "status": "failed",
-                        "error": str(host_result.exception)
-                    }
-                else:
-                    formatted_results[hostname] = {
-                        "status": "success",
-                        "data": host_result.result
-                    }
-
-            return json.dumps(formatted_results, indent=2)
-        except Exception as e:
+            response = self.api_client.session.post(
+                f"{self.api_client.base_url}/interfaces/ip",
+                json=hostnames
+            )
+            response.raise_for_status()
+            return json.dumps(response.json(), indent=2)
+        except requests.exceptions.RequestException as e:
             logger.error(f"Error in GetInterfacesIPTool: {str(e)}")
-            return json.dumps({"error": str(e)})
+            return json.dumps({"error": f"API request failed: {str(e)}"})
+        except json.JSONDecodeError as e:
+            logger.error(f"Invalid JSON input: {str(e)}")
+            return json.dumps({"error": "Invalid JSON input format"})
 
     async def _arun(self, hostnames_json: str) -> str:
-        # Async implementation would go here
         raise NotImplementedError("Async version not implemented")
 
 class GetInterfacesDetailTool(BaseTool):
@@ -100,37 +96,26 @@ class GetInterfacesDetailTool(BaseTool):
     - Speed
     - And other interface-specific details
     """
-    nornir_manager: NornirManager = Field(default_factory=NornirManager)
+    api_client: NetworkAPIClient = Field(default_factory=NetworkAPIClient)
     
     def _run(self, hostnames_json: str) -> str:
         try:
-            # Parse hostnames from JSON string
             hostnames = json.loads(hostnames_json)
             if not isinstance(hostnames, list):
                 raise ValueError("Input must be a JSON array of hostnames")
 
-            # Filter hosts and run the task
-            filtered_nr = self.nornir_manager.filter_hosts(hostnames)
-            result = filtered_nr.run(task=get_interfaces)
-
-            # Format results
-            formatted_results = {}
-            for hostname, host_result in result.items():
-                if host_result.failed:
-                    formatted_results[hostname] = {
-                        "status": "failed",
-                        "error": str(host_result.exception)
-                    }
-                else:
-                    formatted_results[hostname] = {
-                        "status": "success",
-                        "data": host_result.result
-                    }
-
-            return json.dumps(formatted_results, indent=2)
-        except Exception as e:
+            response = self.api_client.session.post(
+                f"{self.api_client.base_url}/interfaces",
+                json=hostnames
+            )
+            response.raise_for_status()
+            return json.dumps(response.json(), indent=2)
+        except requests.exceptions.RequestException as e:
             logger.error(f"Error in GetInterfacesDetailTool: {str(e)}")
-            return json.dumps({"error": str(e)})
+            return json.dumps({"error": f"API request failed: {str(e)}"})
+        except json.JSONDecodeError as e:
+            logger.error(f"Invalid JSON input: {str(e)}")
+            return json.dumps({"error": "Invalid JSON input format"})
 
     async def _arun(self, hostnames_json: str) -> str:
         raise NotImplementedError("Async version not implemented") 
