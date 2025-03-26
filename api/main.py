@@ -21,15 +21,18 @@ from typing import Dict, List
 from datetime import datetime
 from api.network_routes import router as network_router
 from operation.ai_operator import AIOperator
+import uvicorn
 
 logger = get_logger(__name__)
 
 app = FastAPI()
 
-# Add CORS middleware
+# Add CORS middleware with more permissive settings
 origins = [
-    "http://localhost:5173",
-    "http://localhost:8000",
+    "http://localhost:5173",  # Vite dev server
+    "http://localhost:8000",  # FastAPI server
+    "http://127.0.0.1:5173",  # Alternative Vite dev server
+    "http://127.0.0.1:8000",  # Alternative FastAPI server
 ]
 
 app.add_middleware(
@@ -38,6 +41,7 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"]
 )
 
 # Include network routes
@@ -165,10 +169,10 @@ async def save_settings(settings: dict):
             content={"message": "Settings saved successfully"},
             headers={"Cache-Control": "no-cache"}
         )
-    except Exception as e:
+        except Exception as e:
         logger.error(f"Error saving settings: {str(e)}")
         return JSONResponse(
-            status_code=500,
+                status_code=500,
             content={"error": f"Failed to save settings: {str(e)}"}
         )
 
@@ -376,7 +380,7 @@ async def list_files(directory: str):
         
         # 确保目录存在
         os.makedirs(abs_directory, exist_ok=True)
-        
+
         files = []
         for filename in os.listdir(abs_directory):
             abs_path = os.path.join(abs_directory, filename)
@@ -577,5 +581,13 @@ async def chat(request: ChatRequest):
         )
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    # Configure uvicorn with longer timeouts
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        port=8000,
+        reload=True,
+        timeout_keep_alive=120,  # Keep connections alive for 120 seconds
+        timeout_notify=30,        # Notify about timeout after 30 seconds
+        workers=4                 # Use multiple workers for better concurrency
+    )
