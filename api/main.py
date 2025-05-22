@@ -11,7 +11,7 @@ sys.path.append(project_root)
 
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 from pydantic import BaseModel
 from inspection.generic_inspector import GenericInspector
 from utils.logger import get_logger
@@ -134,7 +134,15 @@ def load_settings():
         logger.error(f"Error loading settings: {str(e)}")
         raise
 
-# 修改 get_settings 端点
+# Add settings model
+class Settings(BaseModel):
+    connection: dict
+    logging: dict
+    langchain: dict
+    ai_config: dict
+    directories: dict
+
+# Add these new endpoints
 @app.get("/api/settings")
 async def get_settings():
     """Get current settings from settings.yaml"""
@@ -151,7 +159,6 @@ async def get_settings():
             content={"error": f"Failed to load settings: {str(e)}"}
         )
 
-# 修改 save_settings 端点
 @app.post("/api/settings")
 async def save_settings(settings: dict):
     """Save settings to settings.yaml"""
@@ -169,10 +176,10 @@ async def save_settings(settings: dict):
             content={"message": "Settings saved successfully"},
             headers={"Cache-Control": "no-cache"}
         )
-        except Exception as e:
+    except Exception as e:
         logger.error(f"Error saving settings: {str(e)}")
         return JSONResponse(
-                status_code=500,
+            status_code=500,
             content={"error": f"Failed to save settings: {str(e)}"}
         )
 
@@ -452,55 +459,6 @@ async def list_hosts():
             }
         )
 
-# Add settings model
-class Settings(BaseModel):
-    connection: dict
-    logging: dict
-    langchain: dict
-    ai_config: dict
-    directories: dict
-
-# Add these new endpoints
-@app.get("/api/settings")
-async def get_settings():
-    """Get current settings from settings.yaml"""
-    try:
-        settings = load_settings()
-        return JSONResponse(
-            content=settings,
-            headers={"Cache-Control": "no-cache"}
-        )
-    except Exception as e:
-        logger.error(f"Error loading settings: {str(e)}")
-        return JSONResponse(
-            status_code=500,
-            content={"error": f"Failed to load settings: {str(e)}"}
-        )
-
-@app.post("/api/settings")
-async def save_settings(settings: dict):
-    """Save settings to settings.yaml"""
-    try:
-        settings_file = os.path.join(project_root, "utils", "settings.yaml")
-        
-        # 确保目录存在
-        os.makedirs(os.path.dirname(settings_file), exist_ok=True)
-        
-        # 保存设置
-        with open(settings_file, 'w', encoding='utf-8') as f:
-            yaml.dump(settings, f, default_flow_style=False, allow_unicode=True)
-        
-        return JSONResponse(
-            content={"message": "Settings saved successfully"},
-            headers={"Cache-Control": "no-cache"}
-        )
-    except Exception as e:
-        logger.error(f"Error saving settings: {str(e)}")
-        return JSONResponse(
-            status_code=500,
-            content={"error": f"Failed to save settings: {str(e)}"}
-        )
-
 # 修改 ensure_directories 函数
 def ensure_directories():
     """Ensure all required directories exist"""
@@ -560,10 +518,11 @@ async def chat(request: ChatRequest):
             terminal_output.extend(result["tool_outputs"])
             
         # Add final response
-        terminal_output.append(f"> AI Response: {result['response']}")
+        ai_response = result.get("response", "No response from AI")
+        terminal_output.append(f"> AI Response: {ai_response}")
         
         return {
-            "response": result["response"],
+            "response": ai_response,
             "terminal_output": terminal_output
         }
     except Exception as e:
@@ -579,6 +538,17 @@ async def chat(request: ChatRequest):
                 "terminal_output": error_output
             }
         )
+
+@app.get("/api/config/{filename}")
+async def get_config_file(filename: str):
+    """Get the content of a config YAML file (hosts.yaml, groups.yaml, defaults.yaml)"""
+    allowed_files = {"hosts.yaml", "groups.yaml", "defaults.yaml"}
+    if filename not in allowed_files:
+        raise HTTPException(status_code=400, detail="Invalid config file name")
+    file_path = os.path.join(project_root, "config", filename)
+    if not os.path.exists(file_path):
+        raise HTTPException(status_code=404, detail="File not found")
+    return FileResponse(file_path, media_type="text/yaml", filename=filename)
 
 if __name__ == "__main__":
     # Configure uvicorn with longer timeouts

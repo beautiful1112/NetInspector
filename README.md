@@ -15,88 +15,110 @@ NetInspector 是一个智能网络自动化工具，集成了AI技术，用于�
 ### Description
 NetInspector is an intelligent network automation tool designed for network device inspection and configuration management. Powered by AI technology, it currently supports Huawei USG firewalls and can be extended to support other network devices. The tool helps network administrators improve efficiency and network security through automated inspection, policy analysis, and intelligent reporting.
 
-### AI Operations
-NetInspector now includes an AI-powered network operations assistant that helps network administrators manage and monitor their network devices through natural language interactions.
+### Project Structure
+```
+NetInspector/
+├── api/                # FastAPI backend implementation
+│   ├── main.py        # Main API endpoints and server configuration
+│   └── network_routes.py # Network-specific API routes
+├── config/            # Configuration files
+│   ├── hosts.yaml     # Device inventory configuration
+│   ├── groups.yaml    # Device groups configuration
+│   └── defaults.yaml  # Default settings for devices
+├── frontend/          # React frontend application
+│   └── netinspector-frontend/ # Frontend source code
+├── inspection/        # Core inspection logic
+│   ├── generic_inspector.py # Main inspection implementation
+│   └── __init__.py
+├── operation/         # Operation-related code
+│   ├── ai_operator.py # AI operations implementation
+│   └── __init__.py
+├── templates/         # Template files
+│   ├── commands/     # Command templates for different devices
+│   └── prompts/      # AI prompt templates
+├── utils/            # Utility functions and helpers
+│   ├── settings.yaml # Application settings
+│   └── logger.py     # Logging configuration
+├── network/          # Network-specific implementations
+├── tools/            # Utility tools and scripts
+├── tests/            # Test cases and test utilities
+├── output/           # Output files
+│   ├── raw_configs/  # Raw device configurations
+│   └── reports/      # Inspection reports
+├── logs/             # Application logs
+└── requirements.txt  # Python dependencies
+```
 
 #### AI Assistant Features
 - 🤖 Natural Language Interface
   - Communicate with network devices using everyday language
   - Execute commands through natural language processing
 
-- 🔍 Device Information Retrieval
-  - List all available network devices
-  - Get detailed interface information
-  - Get IP address configurations
+#### Backend Components
+1. **API Layer (`api/`)**
+   - FastAPI-based REST API
+   - Network device management endpoints
+   - Configuration management endpoints
+   - AI operation endpoints
 
-- 📊 Network Analysis
-  - Analyze device configurations
-  - Monitor interface status
-  - Check connectivity issues
+2. **Inspection Engine (`inspection/`)**
+   - Device configuration inspection
+   - Security policy analysis
+   - Performance monitoring
+   - Report generation
 
-- 🛠️ Automated Operations
-  - Execute network commands through natural language
-  - Batch configuration management
-  - Configuration validation
+3. **AI Operations (`operation/`)**
+   - Natural language processing
+   - AI-powered analysis
+   - Automated operations
+   - Intelligent recommendations
 
-#### Example Usage
-```bash
-# Natural language commands examples
+4. **Configuration Management (`config/`)**
+   - Device inventory
+   - Group management
+   - Default settings
+   - Template management
 
-"List all available network devices"
-"Show me the IP addresses of switch01's interfaces"
-"Get detailed information about switch01's interfaces"
-```
+#### Frontend Components
+1. **User Interface (`frontend/`)**
+   - React-based web application
+   - Ant Design components
+   - Real-time monitoring dashboard
+   - Configuration management interface
 
-### REST API Documentation
-NetInspector provides a comprehensive REST API for programmatic access to network device information and management.
+2. **Templates (`templates/`)**
+   - Command templates for different devices
+   - AI prompt templates
+   - Report templates
 
-#### Available Endpoints
-- `GET /hosts`
-  - List all available network devices
-  - Returns a list of device hostnames and their basic information
+### Features
 
-- `POST /interfaces/ip`
-  - Get IP addresses for all interfaces on specified devices
-  - Request body: JSON array of hostnames
-  - Returns IPv4 and IPv6 addresses for each interface
-
-- `POST /interfaces`
-  - Get detailed interface information for specified devices
-  - Request body: JSON array of hostnames
-  - Returns comprehensive interface details including status, MTU, speed, etc.
-
-#### API Usage Examples
-```bash
-# List all hosts
-curl -X GET http://localhost:8000/hosts
-
-# Get interface IPs for specific devices
-curl -X POST http://localhost:8000/interfaces/ip \
-  -H "Content-Type: application/json" \
-  -d '["switch01"]'
-
-# Get detailed interface information
-curl -X POST http://localhost:8000/interfaces \
-  -H "Content-Type: application/json" \
-  -d '["switch01"]'
-```
-
-### Key Features
+#### Network Operations
 - 🤖 Automated device inspection
 - 💾 Configuration backup and management
 - 📊 Performance monitoring and analysis
-- 🛡️ Security policy inspection and analysis
-- 🧠 AI-powered configuration analysis
-- 📝 Automated report generation
-- 🔄 Real-time monitoring and alerts
+- 🛡️ Security policy inspection
+- 🔄 Real-time monitoring
 - 🔍 Deep security inspection
-- 🌐 Web-based management interface
+
+#### AI Capabilities
+- 🧠 Natural language interface
+- 📝 Intelligent report generation
+- 🔧 Automated troubleshooting
+- 📈 Smart analysis and recommendations
+
+#### Configuration Management
+- 📋 Template-based configuration
+- 🔄 Batch operations
+- ✅ Configuration validation
+- 📦 Version control
 
 ### Technology Stack
+
 #### Backend
 - Python 3.12
 - FastAPI
-- Nornir (Network Automation Framework)
+- Nornir (Network Automation)
 - OpenAI API Integration
 - SQLite Database
 
@@ -149,33 +171,17 @@ cd frontend/netinspector-frontend
 npm run dev
 ```
 
-### Project Structure
-```
-NetInspector/
-├── api/                # API implementation
-├── config/             # Configuration files
-├── frontend/          # Frontend code
-│   └── netinspector-frontend/
-├── inspection/        # Inspection logic
-├── operation/        # Operation related code
-├── templates/        # Template files
-│   ├── commands/    # Command templates
-│   └── prompts/     # AI prompts
-├── utils/            # Utility functions
-└── README.md
-```
-
 ### Configuration
-- Configure your credentials in `credential.yaml`
-- Customize inspection parameters in `commands.yaml` in the templates folder
-- Customize prompt messages in `prompt.yaml` in the templates folder
-- Customize settings of log and API key in settings.py in the utils folder
-- Customize device information in `config.yaml` in the config folder
+- Configure device credentials in `config/credential.yaml`
+- Customize inspection parameters in `templates/commands/`
+- Customize AI prompts in `templates/prompts/`
+- Configure application settings in `utils/settings.yaml`
+- Manage device inventory in `config/hosts.yaml`
 
-### Output Files
+### Output and Logs
 - Raw device configurations: `output/raw_configs/`
 - Inspection reports: `output/reports/`
-- Log files: `logs/`
+- Application logs: `logs/`
 
 ### Dependencies
 - Python 3.8+
@@ -208,90 +214,109 @@ For support and questions:
 ### 描述
 NetInspector（网眼）是一个集成AI技术的智能网络自动化工具，专注于网络设备巡检和配置管理。目前支持华为USG防火墙，并可扩展支持其他网络设备。该工具通过自动化巡检、策略分析和智能报告功能，帮助网络管理员提升工作效率和网络安全性。
 
-### AI 运维
-NetInspector现已包含AI驱动的网络运维助手，通过自然语言交互帮助网络管理员管理和监控网络设备。
-
-#### AI助手功能
-- 🤖 自然语言交互
-  - 使用日常语言与网络设备进行交互
-  - 通过自然语言处理执行命令
-
-- 🔍 设备信息获取
-  - 列出所有可用的网络设备
-  - 获取详细的接口信息
-  - 获取IP地址配置
-
-- 📊 网络分析
-  - 分析设备配置
-  - 监控接口状态
-  - 检查连接问题
-
-- 🛠️ 自动化操作
-  - 通过自然语言执行网络命令
-  - 批量配置管理
-  - 配置验证
-
-#### 使用示例
-```bash
-# 自然语言命令示例
-
-"列出所有可用的网络设备"
-"显示switch01的所有接口IP地址"
-"获取switch01的接口详细信息"
+### 项目结构
+```
+NetInspector/
+├── api/                # FastAPI后端实现
+│   ├── main.py        # 主API端点和服务器配置
+│   └── network_routes.py # 网络特定API路由
+├── config/            # 配置文件
+│   ├── hosts.yaml     # 设备清单配置
+│   ├── groups.yaml    # 设备组配置
+│   └── defaults.yaml  # 设备默认设置
+├── frontend/          # React前端应用
+│   └── netinspector-frontend/ # 前端源代码
+├── inspection/        # 核心巡检逻辑
+│   ├── generic_inspector.py # 主要巡检实现
+│   └── __init__.py
+├── operation/         # 操作相关代码
+│   ├── ai_operator.py # AI操作实现
+│   └── __init__.py
+├── templates/         # 模板文件
+│   ├── commands/     # 不同设备的命令模板
+│   └── prompts/      # AI提示模板
+├── utils/            # 工具函数和辅助程序
+│   ├── settings.yaml # 应用设置
+│   └── logger.py     # 日志配置
+├── network/          # 网络特定实现
+├── tools/            # 工具和脚本
+├── tests/            # 测试用例和测试工具
+├── output/           # 输出文件
+│   ├── raw_configs/  # 设备原始配置
+│   └── reports/      # 巡检报告
+├── logs/             # 应用日志
+└── requirements.txt  # Python依赖
 ```
 
-### REST API 文档
-NetInspector提供了完整的REST API，用于以编程方式访问和管理网络设备信息。
+### 核心组件
 
-#### 可用接口
-- `GET /hosts`
-  - 列出所有可用的网络设备
-  - 返回设备主机名和基本信息列表
+#### 后端组件
+1. **API层 (`api/`)**
+   - 基于FastAPI的REST API
+   - 网络设备管理端点
+   - 配置管理端点
+   - AI操作端点
 
-- `POST /interfaces/ip`
-  - 获取指定设备所有接口的IP地址
-  - 请求体：主机名JSON数组
-  - 返回每个接口的IPv4和IPv6地址
+2. **巡检引擎 (`inspection/`)**
+   - 设备配置巡检
+   - 安全策略分析
+   - 性能监控
+   - 报告生成
 
-- `POST /interfaces`
-  - 获取指定设备的详细接口信息
-  - 请求体：主机名JSON数组
-  - 返回完整的接口详细信息，包括状态、MTU、速度等
+3. **AI操作 (`operation/`)**
+   - 自然语言处理
+   - AI驱动分析
+   - 自动化操作
+   - 智能建议
 
-#### API使用示例
-```bash
-# 列出所有主机
-curl -X GET http://localhost:8000/hosts
+4. **配置管理 (`config/`)**
+   - 设备清单
+   - 组管理
+   - 默认设置
+   - 模板管理
 
-# 获取特定设备的接口IP
-curl -X POST http://localhost:8000/interfaces/ip \
-  -H "Content-Type: application/json" \
-  -d '["switch01"]'
+#### 前端组件
+1. **用户界面 (`frontend/`)**
+   - 基于React的Web应用
+   - Ant Design组件
+   - 实时监控仪表板
+   - 配置管理界面
 
-# 获取详细接口信息
-curl -X POST http://localhost:8000/interfaces \
-  -H "Content-Type: application/json" \
-  -d '["switch01"]'
-```
+2. **模板 (`templates/`)**
+   - 不同设备的命令模板
+   - AI提示模板
+   - 报告模板
 
-### 核心功能
+### 功能特性
+
+#### 网络操作
 - 🤖 自动化设备巡检
 - 💾 配置备份与管理
 - 📊 性能监控与分析
-- 🛡️ 安全策略检查与分析
-- 🧠 AI驱动的配置分析
-- 📝 自动化报告生成
-- 🔄 实时监控和告警
+- 🛡️ 安全策略检查
+- 🔄 实时监控
 - 🔍 深度安全检查
-- 🌐 Web管理界面
+
+#### AI能力
+- 🧠 自然语言界面
+- 📝 智能报告生成
+- 🔧 自动化故障排除
+- 📈 智能分析和建议
+
+#### 配置管理
+- 📋 基于模板的配置
+- 🔄 批量操作
+- ✅ 配置验证
+- 📦 版本控制
 
 ### 技术栈
+
 #### 后端
 - Python 3.12
 - FastAPI
-- Nornir (网络自动化框架)
-- OpenAI API 集成
-- SQLite 数据库
+- Nornir (网络自动化)
+- OpenAI API集成
+- SQLite数据库
 
 #### 前端
 - React 18
@@ -342,33 +367,17 @@ cd frontend/netinspector-frontend
 npm run dev
 ```
 
-### 项目结构
-```
-NetInspector/
-├── api/                # API实现
-├── config/             # 配置文件目录
-├── frontend/          # 前端代码
-│   └── netinspector-frontend/
-├── inspection/        # 巡检逻辑
-├── operation/        # 操作相关代码
-├── templates/        # 模板文件
-│   ├── commands/    # 命令模板
-│   └── prompts/     # AI提示模板
-├── utils/            # 工具函数
-└── README.md
-```
-
 ### 配置说明
-- 在config文件夹中的`credential.yaml`中配置认证信息
-- 在templates文件夹中的`commands.yaml`中自定义巡检参数
-- 在templates文件夹中的`prompt.yaml`中自定义提示提示词
-- 在utils文件夹中的`settings.py`中自定义日志和API密钥设置
-- 在config文件夹中的`config.yaml`中自定义设备信息
+- 在 `config/credential.yaml` 中配置设备认证信息
+- 在 `templates/commands/` 中自定义巡检参数
+- 在 `templates/prompts/` 中自定义AI提示
+- 在 `utils/settings.yaml` 中配置应用设置
+- 在 `config/hosts.yaml` 中管理设备清单
 
-### 输出文件
+### 输出和日志
 - 设备原始配置：`output/raw_configs/`
 - 巡检报告：`output/reports/`
-- 日志文件：`logs/`
+- 应用日志：`logs/`
 
 ### 依赖项
 - Python 3.8+

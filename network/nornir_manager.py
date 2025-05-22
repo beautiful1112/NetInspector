@@ -4,6 +4,21 @@ from typing import List, Dict, Any
 import logging
 import os
 import yaml
+from .napalm_operations import (
+    get_interfaces_ip,
+    get_interfaces,
+    get_config,
+    get_facts,
+    get_environment,
+    get_routes,
+    get_arp_table,
+    get_mac_address_table,
+    get_bgp_neighbors,
+    get_bgp_config,
+    get_ospf_neighbors,
+    get_ospf_config,
+    ping_host
+)
 
 logger = logging.getLogger(__name__)
 
@@ -102,4 +117,128 @@ class NornirManager:
             "data": host.data
         }
         logger.debug(f"Host info for {hostname}: {info}")
-        return info 
+        return info
+
+    def get_device_config(self, hostnames: List[str]) -> Dict[str, Any]:
+        """Get complete configuration for specified devices"""
+        try:
+            filtered = self.filter_hosts(hostnames)
+            result = filtered.run(task=get_config)
+            return {host: data[0].result for host, data in result.items()}
+        except Exception as e:
+            logger.error(f"Error getting device config: {str(e)}")
+            return {}
+
+    def get_device_facts(self, hostnames: List[str]) -> Dict[str, Any]:
+        """Get basic device information for specified devices"""
+        try:
+            filtered = self.filter_hosts(hostnames)
+            result = filtered.run(task=get_facts)
+            return {host: data[0].result for host, data in result.items()}
+        except Exception as e:
+            logger.error(f"Error getting device facts: {str(e)}")
+            return {}
+
+    def get_device_environment(self, hostnames: List[str]) -> Dict[str, Any]:
+        """Get environment information for specified devices"""
+        try:
+            filtered = self.filter_hosts(hostnames)
+            result = filtered.run(task=get_environment)
+            return {host: data[0].result for host, data in result.items()}
+        except Exception as e:
+            logger.error(f"Error getting device environment: {str(e)}")
+            return {}
+
+    def get_device_routes(self, hostnames: List[str]) -> Dict[str, Any]:
+        """Get routing table information for specified devices"""
+        try:
+            filtered = self.filter_hosts(hostnames)
+            result = filtered.run(task=get_routes)
+            return {host: data[0].result for host, data in result.items()}
+        except Exception as e:
+            logger.error(f"Error getting device routes: {str(e)}")
+            return {}
+
+    def get_device_arp_table(self, hostnames: List[str]) -> Dict[str, Any]:
+        """Get ARP table information for specified devices"""
+        try:
+            filtered = self.filter_hosts(hostnames)
+            result = filtered.run(task=get_arp_table)
+            return {host: data[0].result for host, data in result.items()}
+        except Exception as e:
+            logger.error(f"Error getting device ARP table: {str(e)}")
+            return {}
+
+    def get_device_mac_table(self, hostnames: List[str]) -> Dict[str, Any]:
+        """Get MAC address table information for specified devices"""
+        try:
+            filtered = self.filter_hosts(hostnames)
+            result = filtered.run(task=get_mac_address_table)
+            return {host: data[0].result for host, data in result.items()}
+        except Exception as e:
+            logger.error(f"Error getting device MAC table: {str(e)}")
+            return {}
+
+    def get_device_bgp_neighbors(self, hostnames: List[str]) -> Dict[str, Any]:
+        """Get BGP neighbors information for specified devices"""
+        try:
+            filtered = self.filter_hosts(hostnames)
+            result = filtered.run(task=get_bgp_neighbors)
+            return {host: data[0].result for host, data in result.items()}
+        except Exception as e:
+            logger.error(f"Error getting device BGP neighbors: {str(e)}")
+            return {}
+
+    def get_device_bgp_config(self, hostnames: List[str]) -> Dict[str, Any]:
+        """Get BGP configuration for specified devices"""
+        try:
+            filtered = self.filter_hosts(hostnames)
+            result = filtered.run(task=get_bgp_config)
+            return {host: data[0].result for host, data in result.items()}
+        except Exception as e:
+            logger.error(f"Error getting device BGP config: {str(e)}")
+            return {}
+
+    def get_device_ospf_neighbors(self, hostnames: List[str]) -> Dict[str, Any]:
+        """Get OSPF neighbors information for specified devices"""
+        try:
+            filtered = self.filter_hosts(hostnames)
+            result = filtered.run(task=get_ospf_neighbors)
+            return {host: data[0].result for host, data in result.items()}
+        except Exception as e:
+            logger.error(f"Error getting device OSPF neighbors: {str(e)}")
+            return {}
+
+    def get_device_ospf_config(self, hostnames: List[str]) -> Dict[str, Any]:
+        """Get OSPF configuration for specified devices"""
+        try:
+            filtered = self.filter_hosts(hostnames)
+            result = filtered.run(task=get_ospf_config)
+            return {host: data[0].result for host, data in result.items()}
+        except Exception as e:
+            logger.error(f"Error getting device OSPF config: {str(e)}")
+            return {}
+
+    def ping_from_device(self, hostname: str, destination: str, source: str = None, size: int = 56, count: int = 5) -> Dict[str, Any]:
+        """Execute ping from specified device to destination
+        
+        Args:
+            hostname: Name of the device to execute ping from
+            destination: Destination IP address to ping
+            source: Source IP address to use (optional)
+            size: Size of ping packet in bytes (default: 56)
+            count: Number of ping packets to send (default: 5)
+        """
+        try:
+            filtered = self.filter_hosts([hostname])
+            result = filtered.run(
+                task=ping_host,
+                destination=destination,
+                source=source,
+                size=size,
+                count=count
+            )
+            return {host: data[0].result for host, data in result.items()}
+        except Exception as e:
+            logger.error(f"Error executing ping from {hostname} to {destination}: {str(e)}")
+            return {} 

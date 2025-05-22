@@ -1,7 +1,7 @@
 ai_config:
   api_base: https://api.siliconflow.cn/v1/
   api_key: 
-  model: Pro/deepseek-ai/DeepSeek-V3
+  model: Qwen/Qwen3-235B-A22B
 connection:
   command_timeout: 120
   connect_timeout: 60
